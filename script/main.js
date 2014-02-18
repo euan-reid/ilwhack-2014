@@ -22,6 +22,7 @@ var MainClass = new Class({
 			},
 			firstDay: 1,
 			aspectRatio: 1.9,
+			defaultView: 'agendaWeek',
 			editable: true,
 			events: [
 				{
