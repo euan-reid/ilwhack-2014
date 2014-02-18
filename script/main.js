@@ -6,6 +6,11 @@ var MainClass = new Class({
 	ready: function(){
 		this.locationTest = new Locator();
 		this.showCalendar();
+
+		place1 = new Vec2(55.930385, -3.118425);
+		place2 = new Vec2(50.087692, 14.421150);
+		duration = this.locationTest.twoPointsDuration(place1, place2);
+
 	},
 
 	showCalendar: function(){

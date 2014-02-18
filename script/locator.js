@@ -1,6 +1,10 @@
 var Locator = new Class({
 	
 	initialize: function(){
+		
+	},
+
+	showNearbyPlaces: function(){
 		that = this;
 		this.myLatlng = new google.maps.LatLng(40.7143528,-74.0059731);
 
@@ -51,7 +55,41 @@ var Locator = new Class({
 
 	},
 
-	
+	twoPointsDuration: function(pointA, pointB){
+		var origin = new google.maps.LatLng(pointA.getX(), pointA.getY());
+		var destination = new google.maps.LatLng(pointB.getX(), pointB.getY());
+
+		var service = new google.maps.DistanceMatrixService();
+		service.getDistanceMatrix(
+		  {
+		    origins: [origin],
+		    destinations: [destination],
+		    travelMode: google.maps.TravelMode.WALKING,
+		    unitSystem: google.maps.UnitSystem.METRIC,
+		    durationInTraffic: true,
+		  }, this.twoPointsDurationCallback.bind(this));
+
+
+	},
+
+	twoPointsDurationCallback: function(response, status){
+		if (status != google.maps.DistanceMatrixStatus.OK) {
+		    alert('Error was: ' + status);
+		    return null;
+
+		} else {
+			try{
+				duration = response.rows[0].elements[0].duration.text;
+				$('#output').html("Duration From Edinburgh to Prague: " + duration);
+			} catch(err) {
+				console.log(err);
+				return null;
+			}
+		}
+		
+	},
+
+
 
 
 

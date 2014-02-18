@@ -18,13 +18,14 @@
 		<script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script>
 		<script src="/script/main.js"></script>
 		<script src="/script/locator.js"></script>
+		<script src="/script/vec2.js"></script>
 		
 	</head>
 	<body>
 		<a onclick="javascript:window.open('http://www.youtube.com/watch?v=wyz_2DEah4o', '_blank');">Cue the music</a>
-		
-		
-		<div id='gmap_canvas' class='gmap_canvas'></div>
+		<div id='output' class=''></div>
+
 		<div id="calendar"></div>
+		
 	</body>
 </html>
