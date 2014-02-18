@@ -1,20 +1,20 @@
-@import url(http://fonts.googleapis.com/css?family=Special+Elite);
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans);
 html {
 	height: 100%
 }
 
 body {
 	height: 100%;
-	background: #a90329; /* Old browsers */
-	background: -moz-linear-gradient(top,  #a90329 0%, #6d0019 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a90329), color-stop(100%,#6d0019)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #a90329 0%,#6d0019 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #a90329 0%,#6d0019 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #a90329 0%,#6d0019 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #a90329 0%,#6d0019 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
-	font-family: 'Special Elite', cursive;
-	color: #dddddd;
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+	font-family: 'Noto Sans', sans-serif;
+	color: #333333;
 }
 a {cursor: pointer; font-size: 1.2em;}
 h1 {
@@ -30,6 +30,10 @@ h1 {
 	background: -webkit-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10+,Safari5.1+ */
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
+}
+#calendar {
+	width: 70%
+	margin: 0 auto;
 }
 
 .gmap_canvas {
