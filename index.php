@@ -23,9 +23,9 @@
 		<title>LifeCal</title>
 
 		<!--Script-->
-		<script type="text/javascript" src="/jquery/jquery.js"></script>
-		<script type="text/javaScript" src="/mootools/mootools-core-1.4.5-full-compat-yc.js"></script>
-		<script type="text/javaScript" src="/script/main.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+		<script type="text/javascript" src="/script/main.js"></script>
 
 		<!--CSS-->
 		<link media="all" rel="stylesheet" type="text/css" href="/css/style.css">
