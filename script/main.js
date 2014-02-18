@@ -20,6 +20,8 @@ var MainClass = new Class({
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			firstDay: 1,
+			aspectRatio: 1.9,
 			editable: true,
 			events: [
 				{
