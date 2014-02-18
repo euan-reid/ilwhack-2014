@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>LifeCal</title>
+		<link rel="icon" type="image/png" href="/imagery/LifeCal-ident.png" />
 
 		<!--CSS-->
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
