@@ -4,7 +4,7 @@ var MainClass = new Class({
 	},
 
 	ready: function(){
-		this.locationTest = new Locator();
+		//this.locationTest = new Locator();
 		this.showCalendar();
 	},
 
