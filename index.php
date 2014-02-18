@@ -22,10 +22,6 @@
 		
 	</head>
 	<body>
-		<a onclick="javascript:window.open('http://www.youtube.com/watch?v=wyz_2DEah4o', '_blank');">Cue the music</a>
-		
-		
-		<div id='gmap_canvas' class='gmap_canvas'></div>
 		<div id="calendar"></div>
 	</body>
 </html>
