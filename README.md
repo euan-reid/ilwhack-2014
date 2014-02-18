@@ -1,3 +1,3 @@
-ILW Hack 2014
+LifeCal
 ============
-Focused on City of Edinburgh area, considering mental health and using Project Ginsberg and Scottish Neighbourhood Statistics.
+LifeCal helps you reach your goals by suggesting places to go and things to do when you have free time on your schedule.
