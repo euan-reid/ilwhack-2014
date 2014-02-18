@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Noto+Sans);
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans|PT+Sans);
 html {
 	height: 100%
 }
@@ -35,6 +35,7 @@ h1 {
 	margin: 5% auto;
 }
 #banner {
+	font-family: 'PT Sans', sans-serif;
 	display: block;
 	margin: 0 auto;
 }
