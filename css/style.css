@@ -32,7 +32,10 @@ h1 {
 	-webkit-text-fill-color: transparent;
 }
 #calendar {
-	width: 70%;
+	margin: 5% auto;
+}
+#banner {
+	display: block;
 	margin: 0 auto;
 }
 

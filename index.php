@@ -22,6 +22,7 @@
 		
 	</head>
 	<body>
+		<img id="banner" src="/imagery/LifeCal logo.svg" />
 		<div id="calendar"></div>
 	</body>
 </html>
