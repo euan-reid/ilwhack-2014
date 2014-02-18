@@ -17,6 +17,7 @@
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
 		<script src="/script/gconf.js"></script>
 		<script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script>
+		<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 		<script src="/script/main.js"></script>
 		<script src="/script/locator.js"></script>
 		<script src="/script/vec2.js"></script>
@@ -27,6 +28,9 @@
 		<div id="calendar"></div>
 
 		<div id='output' class=''></div>
+		<div id='testing'>
+			<button id="authorize-button" style="visibility: hidden">Authorize</button>
+		</div>
 		
 	</body>
 </html>
