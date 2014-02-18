@@ -20,6 +20,11 @@ var MainClass = new Class({
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			titleFormat: {
+				month: 'MMMM yyyy',
+				week: "d [ MMM]{ '&#8212;' [ d MMM]} yyyy",
+				day: 'dddd, MMM d, yyyy'
+			},
 			firstDay: 1,
 			aspectRatio: 1.9,
 			defaultView: 'agendaWeek',
