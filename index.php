@@ -1,19 +1,34 @@
+<?php
+	session_start();
+
+	require_once "../src/apiClient.php";
+	require_once "../src/contrib/apiCalendarService.php";
+
+	$apiClient = new apiClient();
+	$apiClient->setUseObjects(true);
+	$service = new apiCalendarService($apiClient);
+
+	if (isset($_SESSION['oauth_access_token'])) {
+		$apiClient->setAccessToken($_SESSION['oauth_access_token']);
+	} else {
+		$token = $apiClient->authenticate();
+		$_SESSION['oauth_access_token'] = $token;
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<html>
 	<head>
-	<meta charset="UTF-8">
-	<title>ILW Smart Data Hackathon 2014</title>
+		<meta charset="UTF-8">
+		<title>LifeCal</title>
 
-	<!--Script-->
-    <script type="text/javascript" src="jquery/jquery.js"></script>
-	<script type="text/javaScript" src="mootools/mootools-core-1.4.5-full-compat-yc.js"></script>
-    <script type="text/javaScript" src="script/main.js"></script>
+		<!--Script-->
+		<script type="text/javascript" src="/jquery/jquery.js"></script>
+		<script type="text/javaScript" src="/mootools/mootools-core-1.4.5-full-compat-yc.js"></script>
+		<script type="text/javaScript" src="/script/main.js"></script>
 
-    <!--CSS-->
-    <link media="all" rel="stylesheet" type="text/css" href="css/style.css">
-
-
+		<!--CSS-->
+		<link media="all" rel="stylesheet" type="text/css" href="/css/style.css">
 	</head>
 	<body>
 		<a onclick="javascript:window.open('http://www.youtube.com/watch?v=wyz_2DEah4o', '_blank');">Cue the music</a>
