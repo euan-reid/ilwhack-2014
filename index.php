@@ -7,6 +7,8 @@
 		<!--Script-->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+		<script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script>
+		<script src="/script/gconf.js"></script>
 		<script type="text/javascript" src="/script/main.js"></script>
 
 		<!--CSS-->
