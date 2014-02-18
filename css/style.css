@@ -32,12 +32,14 @@ h1 {
 	-webkit-text-fill-color: transparent;
 }
 #calendar {
-	margin: 5% auto;
+	width: 80%;
+	margin: 0 auto;
 }
 #banner {
 	font-family: 'PT Sans', sans-serif;
 	display: block;
-	margin: 0 auto;
+	height: 20%;
+	margin: 0 auto 2.5%;
 }
 
 .gmap_canvas {
