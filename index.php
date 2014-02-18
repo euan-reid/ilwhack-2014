@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>LifeCal</title>
+		<link rel="icon" type="image/png" href="/imagery/LifeCal-ident.png" />
 
 		<!--CSS-->
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -22,10 +23,10 @@
 		
 	</head>
 	<body>
-		<a onclick="javascript:window.open('http://www.youtube.com/watch?v=wyz_2DEah4o', '_blank');">Cue the music</a>
-		<div id='output' class=''></div>
-
+		<img id="banner" src="/imagery/LifeCal logo.svg" />
 		<div id="calendar"></div>
+
+		<div id='output' class=''></div>
 		
 	</body>
 </html>

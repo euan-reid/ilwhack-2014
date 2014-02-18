@@ -4,7 +4,7 @@ var MainClass = new Class({
 	},
 
 	ready: function(){
-		this.locationTest = new Locator();
+		//this.locationTest = new Locator();
 		this.showCalendar();
 
 		place1 = new Vec2(55.930385, -3.118425);
@@ -25,6 +25,14 @@ var MainClass = new Class({
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			titleFormat: {
+				month: 'MMMM yyyy',
+				week: "d [ MMM]{ '&#8212;' [ d MMM]} yyyy",
+				day: 'dddd, MMM d, yyyy'
+			},
+			firstDay: 1,
+			aspectRatio: 1.9,
+			defaultView: 'agendaWeek',
 			editable: true,
 			events: [
 				{
