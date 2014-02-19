@@ -4,6 +4,12 @@ var scopes = 'https://www.googleapis.com/auth/calendar';
 
 var WALKINGSPEEDMETERSPERMINUTE = 83.3;
 
+if (typeof (Number.prototype.toRad) === "undefined") {
+    Number.prototype.toRad = function() {
+        return this * Math.PI / 180;
+    }
+}
+
 function handleClientLoad() {
 	gapi.client.setApiKey(apiKey);
 	window.setTimeout(checkAuth,1);

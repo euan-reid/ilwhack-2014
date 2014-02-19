@@ -78,11 +78,11 @@ var LocTime = new Class({
 
 
 var Solver = Class({
-	initialize: function(storedData){
-		this.storedData = new Object();
-		this.storedData.init = storedData;
+	initialize: function(main, storedData, callbackFunction){
+		this.main = main;
+		this.storedData = { init: storedData };
+		this.callbackFunction = callbackFunction;
 		this.results = [];
-		this.funstionsAlreadySet = false;
 
 		this.iter = 0;
 
@@ -101,13 +101,14 @@ var Solver = Class({
 
 		++this.iter;
 		this.run();
-
 	},
 
 	run: function(){
 		if(this.iter < this.setOfFunctions.length){
 
 			this.setOfFunctions[this.iter].apply(this, this.setOfArgs[this.iter]);
+		} else {
+			this.callbackFunction.apply(this.main, [this.results]);
 		}
 
 	},

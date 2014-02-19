@@ -34,30 +34,13 @@ var Locator = new Class({
   		service.nearbySearch(this.request,
 
   		function(results, status){
-  			console.log(results);
-			/*if (status == google.maps.places.PlacesServiceStatus.OK) {
-			    for (var i = 0; i < results.length; i++) {
-					var place = results[i];
-					this.createMarker(results[i]);
-			    }
-			}*/
-
-		});
-
-	},
-
-	createMarker: function(place){
-		var placeLoc = place.geometry.location;
-		var marker = new google.maps.Marker({
-			map: this.map,
-			position: place.geometry.location
-		});
-
-		that = this;
-		google.maps.event.addListener(marker, 'click', function() {
-			that.infowindow.setContent(place.name);
-			that.infowindow.open(that.map, this);
-		});
+  			if (status == google.maps.places.PlacesServiceStatus.OK) {
+  				this.addResult(results);
+  			} else {
+  				this.addResult(null);
+  			}
+			
+		}.bind(this));
 
 	},
 
@@ -90,7 +73,22 @@ var Locator = new Class({
 
 	},
 
-	findAllPossiblePlaces: function(data, typeOfPlace){
+	twoPointsDistanceHaversine: function(pointA, pointB){
+		latA = pointA.getX();
+		latB = pointB.getX();
+		longA = pointA.getY();
+		longB = pointB.getY();
+
+		var a = Math.sin((latA - latB).toRad()/ 2) * Math.sin((latA - latB).toRad() / 2) +
+			Math.cos(latB.toRad()) * Math.cos(latB.toRad()) *
+			Math.sin((longA - longB).toRad() / 2) * Math.sin((longA - longB).toRad() / 2);
+		
+		var d = 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))*1000;
+
+		return d;
+	},
+
+	giveSuggestion_findAllPossiblePlaces: function(data, typeOfPlace){
 		var freeTimeBetweenEvents = function(){
 			this.storedData.freeTime = this.storedData.init[1].getTime()-this.storedData.init[0].getTime()-this.results[0]/60;
 			this.addResult(null);
@@ -99,16 +97,35 @@ var Locator = new Class({
 		var timeBetween = Math.abs(data[1].getTime() - data[0].getTime());
 		var midpoint = new Vec2((data[0].getX()+data[1].getX())/2, (data[0].getY()+data[1].getY())/2);
 		
-		var action = new Solver(data);
+		var action = new Solver(this, data, this.giveSuggestion_findAllPossiblePlacesCallback.bind(this));
 		action.addFunction(this.twoPointsDuration, [data[0].getLocation(), data[1].getLocation()]);
 		action.addFunction(freeTimeBetweenEvents, []);
 		action.addFunction(this.showNearbyPlaces, [midpoint, timeBetween*WALKINGSPEEDMETERSPERMINUTE]);
 		action.run();
 
+	},
 
-		//zjistit radius a lokalizovat vsechny mozne mista kam jit
-		//seradit - to ale v jine metode
+	giveSuggestion_findAllPossiblePlacesCallback: function(data){
+		var suggestedPlace = this.findBestPlaceByRating(data[2]);
+		console.log(suggestedPlace);
+	},
 
+	findBestPlaceByRating: function(places){
+		var maxRating = 1;
+		var bestPlace = null;
+		$.each(places, function( index, value ) {
+			if(value.rating > maxRating){
+				maxRating = value.rating;
+				bestPlace = value;
+			}
+		});
+
+		if(bestPlace !== null && bestPlace !== undefined)
+			return bestPlace;
+		else if(places.length > 0)
+			return places[0];
+		else
+			return null;
 
 	},
 

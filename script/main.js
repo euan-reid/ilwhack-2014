@@ -5,20 +5,22 @@ var MainClass = new Class({
 
 	ready: function(){
 		this.locationTest = new Locator();
-		this.showCalendar();
 
-		//place1 = new Vec2(55.930385, -3.118425);
-		//place2 = new Vec2(50.087692, 14.421150);
-		//var data = new Object();
-		//place1 = new Vec2(55.962807, -3.186773);
-		//place2 = new Vec2(55.943294, -3.187548);
+		//var pointA = new Vec2(55.953252, -3.188267);
+		//var pointB = new Vec2(50.075538, 14.437800);
+
+		//var pointA = new Vec2(55.95451,-3.194275);
+		//var pointB = new Vec2(55.950137,-3.207836);
+		//console.log(this.locationTest.twoPointsDistanceHaversine(pointA, pointB));
+
+		this.showCalendar();
 
 		data = new Array(
 			new LocTime(new Vec2(55.962807, -3.186773), 70),
 			new LocTime(new Vec2(55.943294, -3.187548), 150)
 		);
 
-		this.locationTest.findAllPossiblePlaces(data, 'store');
+		this.locationTest.giveSuggestion_findAllPossiblePlaces(data, 'store');
 	},
 
 	showCalendar: function(){
