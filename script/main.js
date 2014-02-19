@@ -19,7 +19,6 @@ var MainClass = new Class({
 		);
 
 		this.locationTest.findAllPossiblePlaces(data, 'store');
-
 	},
 
 	showCalendar: function(){
