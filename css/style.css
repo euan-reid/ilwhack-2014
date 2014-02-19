@@ -7,6 +7,7 @@ html {
 body {
 	font-family: 'Noto Sans', sans-serif;
 	color: #333333;
+	margin: 0;
 	background: #ffffff;
 	background: -moz-linear-gradient(top, #ffffff 0%, #f1f1f1 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f1f1f1)); /* Chrome,Safari4+ */
@@ -15,6 +16,8 @@ body {
 	background: -ms-linear-gradient(top, #ffffff 0%,#f1f1f1 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #ffffff 0%,#f1f1f1 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f1f1f1',GradientType=0 ); /* IE6-9 */
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 
 a {cursor: pointer; font-size: 1.2em;}
@@ -39,10 +42,9 @@ h1 {
 }
 
 #banner {
-	font-family: 'PT Sans', sans-serif;
 	display: block;
 	height: 20%;
-	margin: 0 auto 2.5%;
+	margin: 0 auto;
 }
 
 .gmap_canvas {

@@ -20,9 +20,9 @@ function checkAuth() {
 }
 
 function handleAuthResult(authResult) {
-	var authorizeButton = document.getElementById('authorize-button');
+	var authorizeButton = document.getElementById('banner');
 	if (authResult && !authResult.error) {
-		authorizeButton.style.visibility = 'hidden';
+		// authorizeButton.style.visibility = 'hidden';
 		makeApiCall();
 	} else {
 		authorizeButton.style.visibility = '';
