@@ -29,7 +29,7 @@ var MainClass = new Class({
 		var m = date.getMonth();
 		var y = date.getFullYear();
 
-		$('#calendar').fullCalendar({
+		var calendar = $('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
 				center: 'title',
@@ -43,7 +43,28 @@ var MainClass = new Class({
 			firstDay: 1,
 			aspectRatio: 1.9,
 			defaultView: 'agendaWeek',
+			
+			selectable: true,
+			selectHelper: true,
+			select: function(start, end, allDay) {
+				// Generates the pop up menu and creates a new event.
+				// TODO create a new Google calendar event. 
+				var title = prompt('Event Title:');
+				if (title) {
+					calendar.fullCalendar('renderEvent',
+						{
+							title: title,
+							start: start,
+							end: end,
+							allDay: allDay
+						},
+						true // make the event "stick"
+					);
+				}
+				calendar.fullCalendar('unselect');
+			},
 			editable: true,
+			dropable: true,
 			eventSources: 
 				[
 					// source with no options
