@@ -41,10 +41,9 @@ h1 {
 }
 
 #banner {
-	font-family: 'PT Sans', sans-serif;
 	display: block;
 	height: 20%;
-	margin: 0 auto 2.5%;
+	margin: 0 auto;
 }
 
 .gmap_canvas {
