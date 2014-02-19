@@ -1,20 +1,27 @@
 @import url(http://fonts.googleapis.com/css?family=Noto+Sans|PT+Sans);
+
 html {
-	height: 100%
+	height: 100%;
 }
 
 body {
-	background: #ffffff; /* Old browsers */
-	background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
 	font-family: 'Noto Sans', sans-serif;
 	color: #333333;
+	background-color: #
 }
+
+.head{
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 0%, #f1f1f1 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f1f1f1)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f1f1f1 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#f1f1f1 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#f1f1f1 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%,#f1f1f1 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f1f1f1',GradientType=0 ); /* IE6-9 */
+	
+}
+
 a {cursor: pointer; font-size: 1.2em;}
 h1 {
 	text-align:center;
@@ -30,10 +37,12 @@ h1 {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
+
 #calendar {
 	width: 90%;
 	margin: 0 auto;
 }
+
 #banner {
 	font-family: 'PT Sans', sans-serif;
 	display: block;
@@ -47,5 +56,11 @@ h1 {
     margin: 30px auto;
     padding: 40px;
     overflow: none;
-    display: block;
+    display: none;
 }
+
+.output{
+	padding: 30px;
+
+}
+

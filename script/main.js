@@ -4,12 +4,21 @@ var MainClass = new Class({
 	},
 
 	ready: function(){
-		//this.locationTest = new Locator();
+		this.locationTest = new Locator();
 		this.showCalendar();
 
-		place1 = new Vec2(55.930385, -3.118425);
-		place2 = new Vec2(50.087692, 14.421150);
-		duration = this.locationTest.twoPointsDuration(place1, place2);
+		//place1 = new Vec2(55.930385, -3.118425);
+		//place2 = new Vec2(50.087692, 14.421150);
+		//var data = new Object();
+		//place1 = new Vec2(55.962807, -3.186773);
+		//place2 = new Vec2(55.943294, -3.187548);
+
+		data = new Array(
+			new LocTime(new Vec2(55.962807, -3.186773), 70),
+			new LocTime(new Vec2(55.943294, -3.187548), 150)
+		);
+
+		this.locationTest.findAllPossiblePlaces(data, 'store');
 
 	},
 

@@ -2,6 +2,8 @@ var clientId = '182653051318';
 var apiKey = 'AIzaSyCojj5ZHvVx1njVabv5TfE1zETZlAKaQTA';
 var scopes = 'https://www.googleapis.com/auth/calendar';
 
+var WALKINGSPEEDMETERSPERMINUTE = 83.3;
+
 function handleClientLoad() {
 	gapi.client.setApiKey(apiKey);
 	window.setTimeout(checkAuth,1);
