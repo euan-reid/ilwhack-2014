@@ -24,7 +24,7 @@
 	</head>
 	<body>
 		<div class='head'>
-		<img id="banner" src="/imagery/LifeCal logo.svg"/>
+		<img id="banner" src="/imagery/LifeCal-logo.png"/>
 		</div>
 
 		<div id="calendar"></div>
