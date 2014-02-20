@@ -22,11 +22,13 @@ function checkAuth() {
 function handleAuthResult(authResult) {
 	var authorizeButton = document.getElementById('banner');
 	if (authResult && !authResult.error) {
+<<<<<<< HEAD
 		authorizeButton.onclick = null;
 		setInterval(loadCalendarIds, 60000);
-		makeApiCall();
+		Main.fetchRemoteCalendarEvents();
 	} else {
 		authorizeButton.onclick = handleAuthClick;
+		
 	}
 }
 
@@ -54,30 +56,6 @@ function handleAuthClick(event) {
 	gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, Main.calendarSetup);
 	return false;
 }
-
-function makeApiCall() {
-	gapi.client.load('calendar', 'v3', function() {
-		var request = gapi.client.calendar.events.list({'calendarId': 'primary'});
-		request.execute(function(resp) {
-			if (resp.items) {
-				for (var i = 0; i < resp.items.length; i++) {
-					var calendarItem = resp.items[i]; 
-					var summary = calendarItem.summary;
-					var startTime = calendarItem.start.dateTime ? calendarItem.start.dateTime : new Date();
-					var endTime = !calendarItem.endTimeUnspecified ? calendarItem.end.dateTime : new Date();
-					addEvent(summary, startTime, endTime);
-					var li = document.createElement('li');
-					li.appendChild(document.createTextNode(resp.items[i].summary));
-					li.appendChild(document.createTextNode(resp.items[i].location));
-					li.appendChild(document.createTextNode(resp.items[i].description));
-					li.appendChild(document.createTextNode(resp.items[i].end.dateTime));
-					li.appendChild(document.createTextNode(resp.items[i].start.dateTime));
-					document.getElementById('output').appendChild(li);
-				}
-			}
-		});
-	});
-};
 
 function addEvent(summary, startTime, endTime){
 	var newEvent = [{
