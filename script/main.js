@@ -25,6 +25,8 @@ var timestamp = function (date) {
 		+ ":" + this.pad(Math.abs(offset) % 60, 2);
 }
 
+var calendarIds = {};
+
 var MainClass = new Class({
 	
 	initialize: function(){
@@ -328,6 +330,8 @@ var MainClass = new Class({
 	
 	calendarSetup: function(authResult) {
 		if (authResult && !authResult.error) {
+			var authorizeButton = document.getElementById('banner');
+			authorizeButton.onclick = null;
 			var addSleepEvent = function (cal) {
 				if (cal && !cal.error) {
 					var start = new Date();
@@ -381,6 +385,17 @@ var MainClass = new Class({
 				}
 			}
 			Main.addGCalendar("Eat", addEatEvents);
+			var blankCalCallback = function (cal) {
+				if (cal && !cal.error)
+					console.log("calender created");
+				else
+					console.log("calendar not created");
+				console.log(cal);
+			}
+			Main.addGCalendar("Work", blankCalCallback);
+			Main.addGCalendar("Learning", blankCalCallback);
+			Main.addGCalendar("Exercise", blankCalCallback);
+			Main.addGCalendar("Social", blankCalCallback);
 		} else {
 			console.log("authorisation error");
 			console.log(authResult);

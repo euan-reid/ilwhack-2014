@@ -22,11 +22,11 @@ function checkAuth() {
 function handleAuthResult(authResult) {
 	var authorizeButton = document.getElementById('banner');
 	if (authResult && !authResult.error) {
-		// authorizeButton.style.visibility = 'hidden';
 		Main.fetchRemoteCalendarEvents();
+
 	} else {
-		authorizeButton.style.visibility = '';
 		authorizeButton.onclick = handleAuthClick;
+		
 	}
 }
 
