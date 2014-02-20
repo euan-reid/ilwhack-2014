@@ -100,7 +100,7 @@ var Locator = new Class({
 		var action = new Solver(this, data, this.giveSuggestion_findAllPossiblePlacesCallback.bind(this));
 		action.addFunction(this.twoPointsDuration, [data[0].getLocation(), data[1].getLocation()]);
 		action.addFunction(freeTimeBetweenEvents, []);
-		action.addFunction(this.showNearbyPlaces, [midpoint, timeBetween*WALKINGSPEEDMETERSPERMINUTE]);
+		action.addFunction(this.showNearbyPlaces, [midpoint, (timeBetween)*WALKINGSPEEDMETERSPERMINUTE]);
 		action.run();
 
 	},

@@ -4,6 +4,13 @@ html {
 	height: 100%;
 }
 
+hr{
+	margin: 0 auto 40px auto;
+	padding: 0px;
+	width: 80%;
+	border: ridge 1px #e30613;
+}
+
 body {
 	font-family: 'Noto Sans', sans-serif;
 	color: #333333;
@@ -43,8 +50,7 @@ h1 {
 
 #banner {
 	display: block;
-	height: 20%;
-	margin: 0 auto;
+	margin: 20px auto 0 auto;
 }
 
 .gmap_canvas {
@@ -59,5 +65,13 @@ h1 {
 .output{
 	padding: 30px;
 
+}
+
+#popupBox{
+	height: 200px;
+    width: 600px;
+    display:none;
+    background: #ccc;
+    border-radius: 5px;
 }
 
