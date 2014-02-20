@@ -51,6 +51,8 @@ var MainClass = new Class({
 
 		gapi.client.load('calendar', 'v3', function() {
 			for (key in calendarIds) {
+				if (typeof calendarIds[key] != "string")
+					continue;
 				var request = gapi.client.calendar.events.list({'calendarId': calendarIds[key]})
 				request.execute(function(resp) {
 					if (resp && !resp.error) {
