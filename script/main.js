@@ -84,8 +84,6 @@ var MainClass = new Class({
 				}(key));
 			}
 
-			console.log(importData);
-
 			Main.showCalendar('#calendar', importData);
 		});
 	},
