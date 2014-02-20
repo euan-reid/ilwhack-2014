@@ -59,6 +59,8 @@ var MainClass = new Class({
 				})
 				request.execute(function(resp) {
 					if (resp && !resp.error && resp.items) {
+						console.log(key);
+						console.log(resp.items);
 						for (var i = 0; i < resp.items.length; i++) {
 							var eventData = {
 								title: resp.items[i].summary,
