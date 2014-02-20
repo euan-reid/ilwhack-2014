@@ -50,7 +50,9 @@ var MainClass = new Class({
 			var importData = new Array();
 			var locator = new Locator();
 			
+				console.log(calendarIds);
 			for (key in calendarIds) {
+				console.log(key + ": " + calendarIds[key]);
 				if (typeof calendarIds[key] != "string")
 					continue;
 				var request = gapi.client.calendar.events.list({
