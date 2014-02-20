@@ -208,7 +208,6 @@ var MainClass = new Class({
 	},
 
 	showCalendar: function(div, importData){
-		console.log('CALENDAR!');
 		var calendar = $(div).fullCalendar({
 			header: {
 				left: 'prev,next today',
@@ -258,7 +257,7 @@ var MainClass = new Class({
 
 		});
 		
-		setTimeout(function (){$(div).fullCalendar('render');}, 2000);
+		$(div).fullCalendar( 'rerenderEvents' )
 	},
 	
 	drawSpiderGraph: function(diva){
