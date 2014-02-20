@@ -49,6 +49,12 @@ h1 {
 }
 #banner > img {width: 100%;}
 
+#spidergraph {
+	display: block;
+	margin: 5px 20px 0 auto;
+	width: 10%;
+	}
+
 .gmap_canvas {
 	height: 300px;
 	width: 300px;

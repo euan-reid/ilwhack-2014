@@ -20,6 +20,7 @@
 		<script src="/script/gconf.js"></script>
 		<script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script>
 		<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+		<script src="/script/jquery.spidergraph.js"></script>
 		<script src="/script/main.js"></script>
 		<script src="/script/locator.js"></script>
 		<script src="/script/suggestor.js"></script>
@@ -31,6 +32,8 @@
 			<div id="banner">
 				<img src="/imagery/LifeCal-logo.png" />
 			</div>
+			<!-- Using jQuery spidergraph  - https://github.com/jmstriegel/jquery.spidergraph/ -->
+			<div id="spidergraph"></div>
 		</div>
 
 		<div id="calendar"></div>
