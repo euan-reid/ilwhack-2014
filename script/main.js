@@ -137,37 +137,41 @@ var MainClass = new Class({
 		});
 	},
 	
-	calendarSetup: function() {
-		var that = this;
-		gapi.client.load('calendar', 'v3', function() {
-			var request = gapi.client.calendar.calendars.insert({
-				"kind": "calendar#calendar",
-				"summary": "Sleep"
-			});
-			request.execute(function(calId) {
-				gapi.client.load('calendar', 'v3', function () {
-					var start = new Date();
-					start.setHours(23);
-					var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
-					var req = gapi.client.calendar.events.insert({
-						"kind": "calendar#event",
-						"calendarId": calId,
-						"summary": "Sleep",
-						"location": "Bed",
-						"start": {
-							"dateTime": that.timestamp(start)
-						},
-						"end": {
-							"dateTime": that.timestamp(end)
-						},
-						"recurrence": ["RRULE:FREQ=DAILY"]
-					});
-					req.execute(function(resp) {
-						console.log(resp);
+	calendarSetup: function(authResult) {
+		if (authResult && !authResult.error) {
+			var that = this;
+			gapi.client.load('calendar', 'v3', function() {
+				var request = gapi.client.calendar.calendars.insert({
+					"kind": "calendar#calendar",
+					"summary": "Sleep"
+				});
+				request.execute(function(calId) {
+					gapi.client.load('calendar', 'v3', function () {
+						var start = new Date();
+						start.setHours(23);
+						var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
+						var req = gapi.client.calendar.events.insert({
+							"kind": "calendar#event",
+							"calendarId": calId,
+							"summary": "Sleep",
+							"location": "Bed",
+							"start": {
+								"dateTime": that.timestamp(start)
+							},
+							"end": {
+								"dateTime": that.timestamp(end)
+							},
+							"recurrence": ["RRULE:FREQ=DAILY"]
+						});
+						req.execute(function(resp) {
+							console.log(resp);
+						});
 					});
 				});
 			});
-		});
+		} else {
+			console.log(authResult);
+		}
 	}
 
 });
