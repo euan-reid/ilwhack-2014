@@ -50,10 +50,14 @@ var MainClass = new Class({
 		var locator = new Locator();
 
 		gapi.client.load('calendar', 'v3', function() {
-			var request = gapi.client.calendar.events.list({'calendarId': 'primary'});
+			var request = gapi.client.calendar.events.list({
+				'calendarId': 'primary',
+				'timeMin': '2014-02-15T12:00:00-00:00'
+			});
 			request.execute(function(resp) {
 				if (resp.items) {
 					for (var i = 0; i < resp.items.length; i++) {
+						console.log(resp.items[i]);
 						var eventData = {
 							title: resp.items[i].summary,
 							start: (resp.items[i] && resp.items[i].start && resp.items[i].start.dateTime) ? (resp.items[i].start.dateTime) : (new Date()),
