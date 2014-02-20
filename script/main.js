@@ -242,7 +242,7 @@ var MainClass = new Class({
 					console.log(cal);
 				}
 			}
-			this.addGCalendar("Sleep", addSleepEvent);
+			Main.addGCalendar("Sleep", addSleepEvent);
 		} else {
 			console.log("authorisation error");
 			console.log(authResult);
