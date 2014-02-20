@@ -63,4 +63,5 @@ function addEvent(summary, startTime, endTime){
 		end: endTime,
 	}];
 	$('#calendar').fullCalendar( 'addEventSource', newEvent );
+	$('#calendar').fullCalendar( 'renderEvent', newEvent , true );
 };
