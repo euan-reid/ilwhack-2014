@@ -28,7 +28,7 @@
 		
 	</head>
 	<body>
-		<div class='header'>
+		<div id='header'>
 			<div id="banner"></div>
 			<!-- Using jQuery spidergraph  - https://github.com/jmstriegel/jquery.spidergraph/ -->
 			<div id="graphbox"><div id="spidergraph"></div></div>
