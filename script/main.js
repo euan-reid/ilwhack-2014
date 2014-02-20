@@ -54,20 +54,6 @@ var MainClass = new Class({
 			request.execute(function(resp) {
 				if (resp.items) {
 					for (var i = 0; i < resp.items.length; i++) {
-						var calendarItem = resp.items[i]; 
-						var summary = calendarItem.summary;
-						var startTime = calendarItem.start.dateTime ? calendarItem.start.dateTime : new Date();
-						var endTime = !calendarItem.endTimeUnspecified ? calendarItem.end.dateTime : new Date();
-						addEvent(summary, startTime, endTime);
-						var li = document.createElement('li');
-						li.appendChild(document.createTextNode(resp.items[i].summary));
-						li.appendChild(document.createTextNode(resp.items[i].location));
-						li.appendChild(document.createTextNode(resp.items[i].description));
-						li.appendChild(document.createTextNode(resp.items[i].end.dateTime));
-						li.appendChild(document.createTextNode(resp.items[i].start.dateTime));
-
-
-
 						var eventData = {
 							title: resp.items[i].summary,
 							start: resp.items[i].start.dateTime,

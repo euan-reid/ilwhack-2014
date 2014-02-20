@@ -27,7 +27,6 @@ function handleAuthResult(authResult) {
 		Main.fetchRemoteCalendarEvents();
 	} else {
 		authorizeButton.onclick = handleAuthClick;
-		
 	}
 }
 
