@@ -1,4 +1,4 @@
-var clientId = '400024507226';
+var clientId = '400024507226-jgpklj9ofen2avmfjnk0aekpsvncr54h.apps.googleusercontent.com';
 var apiKey = 'AIzaSyB33EV0puEFY73thEKJFch-04qI8-85Fvg';
 var scopes = 'https://www.googleapis.com/auth/calendar';
 
