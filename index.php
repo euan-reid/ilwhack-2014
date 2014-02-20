@@ -29,9 +29,7 @@
 	</head>
 	<body>
 		<div class='header'>
-			<div id="banner">
-				<img src="/imagery/LifeCal-logo.png" />
-			</div>
+			<div id="banner"></div>
 			<!-- Using jQuery spidergraph  - https://github.com/jmstriegel/jquery.spidergraph/ -->
 			<div id="graphbox"><div id="spidergraph"></div></div>
 		</div>
