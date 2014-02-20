@@ -57,7 +57,8 @@ var MainClass = new Class({
 					'calendarId': calendarIds[key],
 					'timeMin': '2014-02-15T12:00:00-00:00'
 				})
-				request.execute(function(resp) {
+				request.execute(function(key, resp) {
+					console.log(key)
 					if (resp && !resp.error && resp.items) {
 						console.log(key);
 						console.log(resp.items);
@@ -80,7 +81,7 @@ var MainClass = new Class({
 						console.log("Failed to retrieve events from " + calendarIds[key]);
 						console.log(resp);
 					}
-				});
+				}(key));
 			}
 
 			console.log(importData);
@@ -257,7 +258,7 @@ var MainClass = new Class({
 
 		});
 		
-		$(div).fullCalendar( 'rerenderEvents' )
+		$(div).fullCalendar('rerenderEvents')
 	},
 	
 	drawSpiderGraph: function(diva){
