@@ -201,8 +201,7 @@ var MainClass = new Class({
 							var start = new Date();
 							start.setHours(23,0,0,0);
 							var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
-							console.log(end);
-							console.log(timestamp(end));
+							console.log(cal.timeZone);
 							var req = gapi.client.calendar.events.insert({
 								"calendarId": calendar.id,
 								"resource": {
