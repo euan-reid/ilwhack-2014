@@ -46,8 +46,8 @@ function makeApiCall() {
 					li.appendChild(document.createTextNode(resp.items[i].summary));
 					li.appendChild(document.createTextNode(resp.items[i].location));
 					li.appendChild(document.createTextNode(resp.items[i].description));
-					li.appendChild(document.createTextNode(resp.items[i].end.datetime));
-					li.appendChild(document.createTextNode(resp.items[i].start.datetime));
+					li.appendChild(document.createTextNode(resp.items[i].end.dateTime));
+					li.appendChild(document.createTextNode(resp.items[i].start.dateTime));
 					document.getElementById('output').appendChild(li);
 				}
 			}
