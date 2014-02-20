@@ -50,10 +50,43 @@ var MainClass = new Class({
 		var locator = new Locator();
 
 		gapi.client.load('calendar', 'v3', function() {
+<<<<<<< HEAD
 			var request = gapi.client.calendar.events.list({
 				'calendarId': 'primary',
 				'timeMin': '2014-02-15T12:00:00-00:00'
 			});
+=======
+			for (key in calendarIds) {
+				if (typeof calendarIds[key] != "string")
+					continue;
+				var request = gapi.client.calendar.events.list({'calendarId': calendarIds[key]})
+				request.execute(function(resp) {
+					if (resp && !resp.error && resp.items) {
+						for (var i = 0; i < resp.items.length; i++) {
+						var eventData = {
+							title: resp.items[i].summary,
+							start: resp.items[i].start.dateTime,
+							end: resp.items[i].end.dateTime,
+							location: (resp.items[i].location!=null) ? resp.items[i].location : null,
+							backgroundColor: '#fff',
+							textColor: '#333',
+							allDay: false,
+							editable: false,
+							timeFormat: 'h(:mm)'
+						};
+
+						importData.push(eventData);
+					}
+
+					Main.showCalendar('#calendar', importData);
+					} else {
+						console.log("Failed to retrieve events from " + calendarIds[key]);
+						console.log(resp.error);
+					}
+				});
+			}
+			var request = gapi.client.calendar.events.list({'calendarId': 'primary'});
+>>>>>>> 1bad408032f270b6c781914bb9b5fc4b8e7a946f
 			request.execute(function(resp) {
 				if (resp.items) {
 					for (var i = 0; i < resp.items.length; i++) {
