@@ -93,7 +93,6 @@ var MainClass = new Class({
 		});
 	}
 
-
 });
 
 

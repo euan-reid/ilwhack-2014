@@ -28,7 +28,7 @@
 		
 	</head>
 	<body>
-		<div class='header'>
+		<div id='header'>
 			<div id="banner">
 				<img src="/imagery/LifeCal-logo.png" />
 			</div>

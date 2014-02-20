@@ -44,7 +44,6 @@ function makeApiCall() {
 				li.appendChild(document.createTextNode(resp.items[i].summary));
 				document.getElementById('output').appendChild(li);
 			}
-			renderCalendar('#calendar', resp.items);
 		});
 	});
 };
