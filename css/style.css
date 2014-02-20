@@ -4,13 +4,6 @@ html {
 	height: 100%;
 }
 
-hr{
-	margin: 0 auto 40px auto;
-	padding: 0px;
-	width: 80%;
-	border: ridge 1px #e30613;
-}
-
 body {
 	font-family: 'Noto Sans', sans-serif;
 	color: #333333;
@@ -48,30 +41,55 @@ h1 {
 	margin: 0 auto;
 }
 
-#banner {
-	display: block;
-	margin: 20px auto 0 auto;
-}
+/* Top of page */
+	/* Logo */
+	#banner {
+		display: block;
+		float: left;
+		margin: 5px auto 0 20px;
+		text-align: center;
+		width: 10%;
+	}
+	#banner > img {width: 100%;}
+
+	/* Spider graph */
+	#graphbox {
+		margin: 5px 20px 0 auto;
+		position: relative;
+		width: 10%;
+	}
+	#graphbox:before{
+		content: "";
+		display: block;
+		padding-top: 100%;
+	}
+	#spidergraph {
+		position:  absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+	}
 
 .gmap_canvas {
-    height: 300px;
-    width: 300px;
-    margin: 30px auto;
-    padding: 40px;
-    overflow: none;
-    display: none;
+	height: 300px;
+	width: 300px;
+	margin: 30px auto;
+	padding: 40px;
+	overflow: none;
+	display: none;
 }
 
-.output{
+.output {
 	padding: 30px;
 
 }
 
-#popupBox{
+#popupBox {
 	height: 200px;
-    width: 600px;
-    display:none;
-    background: #ccc;
-    border-radius: 5px;
+	width: 600px;
+	display:none;
+	background: #ccc;
+	border-radius: 5px;
 }
 

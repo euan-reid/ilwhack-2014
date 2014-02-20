@@ -7,6 +7,8 @@ var MainClass = new Class({
 		this.showCalendar('#calendar');
 
 		this.suggestor = new Suggestor(this);
+		
+		this.drawSpiderGraph('#spidergraph');
 
 		/*console.log($('#calendar'));
 
@@ -69,6 +71,23 @@ var MainClass = new Class({
 
 		});
 	},
+	
+	drawSpiderGraph: function(div){
+		$(div).spidergraph({
+			'fields': ['live','work','play','rest'],
+			'gridcolor': 'rgba(20,20,20,0)'
+		});
+		$(div).spidergraph('addlayer', { 
+			'strokecolor': 'rgba(230,230,230,0.8)',
+			'fillcolor': 'rgba(0,0,0,0)',
+			'data': [9, 14, 19, 13]
+		});
+		$(div).spidergraph('addlayer', { 
+			'strokecolor': 'rgba(0,0,0,0)',
+			'fillcolor': 'rgba(0,0,230,0.6)',
+			'data': [4, 9, 8, 1]
+		});
+	}
 
 });
 
