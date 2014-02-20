@@ -158,7 +158,7 @@ var MainClass = new Class({
 					"summary": "Sleep"
 				});
 				request.execute(function(cal) {
-					if (cal) {
+					if (cal && !cal.error) {
 						gapi.client.load('calendar', 'v3', function () {
 							var start = new Date();
 							start.setHours(23);
