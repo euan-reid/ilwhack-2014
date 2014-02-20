@@ -154,10 +154,10 @@ var MainClass = new Class({
 						"summary": "Sleep",
 						"location": "Bed",
 						"start": {
-							"dateTime": this.timestamp(start)
+							"dateTime": timestamp(start)
 						},
 						"end": {
-							"dateTime": this.timestamp(end)
+							"dateTime": timestamp(end)
 						},
 						"recurrence": ["RRULE:FREQ=DAILY"]
 					});
@@ -165,7 +165,7 @@ var MainClass = new Class({
 						console.log(resp);
 					});
 				}.bind(this));
-			});
+			}.bind(this));
 		}.bind(this));
 	}
 
