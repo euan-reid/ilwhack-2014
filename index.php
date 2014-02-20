@@ -8,7 +8,6 @@
 		<!--CSS-->
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
 		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css">
-		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.print.css">
 		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 
 		<!--Script-->
@@ -23,18 +22,23 @@
 		<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 		<script src="/script/main.js"></script>
 		<script src="/script/locator.js"></script>
+		<script src="/script/suggestor.js"></script>
 		<script src="/script/structures.js"></script>
 		
 	</head>
 	<body>
 		<div class='head'>
-			<img id="banner" src="/imagery/LifeCal-logo.png"/>
+			<img id="banner" src="/imagery/LifeCal-logo_s.png" width="350px">
+			<hr>
 		</div>
 
 		<div id="calendar"></div>
 
 		<div id='output' class='output'></div>
 		<div id='gmap_canvas' class='gmap_canvas'></div>
+
+
+		<div id='popupBox'><img src='imagery/coffee.png' width='200px'></div>
 		
 	</body>
 </html>
