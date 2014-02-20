@@ -40,7 +40,7 @@ function makeApiCall() {
 	gapi.client.load('calendar', 'v3', function() {
 		var request = gapi.client.calendar.events.list({'calendarId': 'primary'});
 		request.execute(function(resp) {
-			if (resp) {
+			if (resp.items) {
 				for (var i = 0; i < resp.items.length; i++) {
 					var li = document.createElement('li');
 					li.appendChild(document.createTextNode(resp.items[i].summary));
