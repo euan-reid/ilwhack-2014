@@ -163,7 +163,7 @@ var MainClass = new Class({
 							var start = new Date();
 							start.setHours(23);
 							var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
-							var req = gapi.client.calendar.events.insert({"resource":{
+							var req = gapi.client.calendar.events.insert({
 								"kind": "calendar#event",
 								"calendarId": calId,
 								"summary": "Sleep",
@@ -175,7 +175,7 @@ var MainClass = new Class({
 									"dateTime": timestamp(end)
 								},
 								"recurrence": ["RRULE:FREQ=DAILY"]
-							}});
+							});
 							req.execute(function(resp) {
 								console.log("event creation response");
 								console.log(resp);
