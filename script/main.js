@@ -264,7 +264,7 @@ var MainClass = new Class({
 
 		});
 		
-		setTimeout(function (){$(div).fullCalendar('render');}, 1000);
+		setTimeout(function (){$(div).fullCalendar('render');}, 2000);
 	},
 	
 	drawSpiderGraph: function(diva){
