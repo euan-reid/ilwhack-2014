@@ -15,13 +15,28 @@ var Suggestor = new Class({
 			var from = new Date(y, m, d, 13, 30);
 			var to = new Date(y, m, d, 15, 00);
 			this.giveSuggestion(from, to , 'LC');*/
-		}.bind(this), 1000);
+		}.bind(this), 7000);
 	},
 
 	findSuggestions: function(data){
-		var locator = new Locator(this);
 
-		locator.giveSuggestion_findAllPossiblePlaces(data, 'store');
+		if(!data[0].location.x){
+			console.log('tady');
+			var eventData = {
+						from: data[0].getTime(),
+						to: data[1].getTime(),
+						title: "Suggestion",
+						location: null,
+						reference: "",
+						photoUrl: "",
+						rating: 1
+					};
+
+			this.giveSuggestion(eventData);
+
+		} else {
+			locator.giveSuggestion_findAllPossiblePlaces(data, 'store');
+		}
 	},
 
 	getCallendarEvents: function(){
@@ -67,17 +82,23 @@ var Suggestor = new Class({
 	},
 
 	findTypeOfSuggestion: function(firstEvent, secondEvent){
-		//console.log(freeTimes);
+		if(!firstEvent.location)
+			return;
 
 		var from = new Date(firstEvent.end);
 		var to = new Date(secondEvent.start);
 		var timeDifference = this.getTimeInMinutesFromMiliseconds(to-from);
 
+		console.log(timeDifference);
+
 		if(timeDifference <= 120){
+			console.log('YEAH');
 			var data = new Array(
 				new LocTime(new Vec2(firstEvent.location[0], firstEvent.location[1]), from),
 				new LocTime(new Vec2(secondEvent.location[0], secondEvent.location[1]), to)
 			);
+
+			console.log(data);
 
 			this.findSuggestions(data);
 		}

@@ -39,10 +39,12 @@ var MainClass = new Class({
 	ready: function(){
 		//this.showCalendar('#calendar');
 
-		this.suggestor = new Suggestor(this);
-
 		this.drawSpiderGraph('#spidergraph');
 
+	},
+
+	calendarLoaded: function(){
+		this.suggestor = new Suggestor(this);
 	},
 
 	fetchRemoteCalendarEvents: function(){
@@ -206,6 +208,9 @@ var MainClass = new Class({
 	},
 
 	showCalendar: function(div, importData){
+		console.log('CALENDAR!');
+		console.log(importData);
+
 		var calendar = $(div).fullCalendar({
 			header: {
 				left: 'prev,next today',
@@ -254,8 +259,9 @@ var MainClass = new Class({
 			}.bind(this),
 
 		});
-		
-		$(div).fullCalendar('rerenderEvents')
+
+		$(div).fullCalendar('rerenderEvents');
+		this.calendarLoaded();
 	},
 	
 	drawSpiderGraph: function(diva){
@@ -400,6 +406,7 @@ var MainClass = new Class({
 			console.log("authorisation error");
 			console.log(authResult);
 		}
+
 	}
 
 });
