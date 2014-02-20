@@ -48,12 +48,50 @@ var MainClass = new Class({
         });*/
 	},
 
-	showPopUp: function(){
-		$( "#popUpDialog" ).html("<input type='button' value='yes'>");
+	showPopUp: function(event){
+		$( "#popUpDialog" ).html("<div id='map-canvas' class='gmap_canvas'></div>");
+		
 
 		$(function() {
-			$( "#popUpDialog" ).dialog();
+			$( "#popUpDialog" ).dialog({ minWidth: 600 });
 		});
+
+		this.showMapWithLocation(event.location, event.reference);
+	},
+
+	showMapWithLocation: function(location, reference){
+		var targetLoc = new google.maps.LatLng(location.getX(), location.getY());
+		
+		map = new google.maps.Map(document.getElementById('map-canvas'), {
+	    	center: targetLoc,
+		    zoom: 15
+		});
+
+		var request = {
+		  reference: reference
+		};
+
+		var infowindow = new google.maps.InfoWindow();
+		service = new google.maps.places.PlacesService(map);
+		service.getDetails(request, function(place, status) {
+			if (status == google.maps.places.PlacesServiceStatus.OK) {
+			  var marker = new google.maps.Marker({
+			    map: map,
+			    position: place.geometry.location
+			  });
+			  google.maps.event.addListener(marker, 'click', function() {
+			    infowindow.setContent(place.name);
+			    infowindow.open(map, this);
+			  });
+			}
+		});
+
+	},
+
+	showMapWithLocationCallbcak: function(place, status){
+		if (status == google.maps.places.PlacesServiceStatus.OK) {
+		    createMarker(place);
+		}
 	},
 
 	makeEventReal: function(event){
@@ -112,7 +150,7 @@ var MainClass = new Class({
 			editable: true,
 			dropable: true,
 			
-			eventSources: 
+			eventSources:
 				[
 					{url: '/php/userData.php'}
 				],
@@ -121,7 +159,7 @@ var MainClass = new Class({
 				console.log(event);
 
 		        if(event.suggestion == true){
-		        	this.showPopUp();
+		        	this.showPopUp(event);
 
 		        	//$('#calendar').fullCalendar('updateEvent', event);
 		        }

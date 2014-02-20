@@ -46,7 +46,7 @@
 		<div id="calendar"></div>
 
 		<div id='output' class='output'></div>
-		<div id='gmap_canvas' class='gmap_canvas'></div>
+		<div id='gmap_canvas' class='hidden'></div>
 
 
 		<div id='popUpDialog' title="Event information"></div>

@@ -116,7 +116,9 @@ var Locator = new Class({
 
 	giveSuggestion_findAllPossiblePlacesCallback: function(previousData, data){
 		var suggestedPlace = this.findBestPlaceByRating(data[2]);
-		this.main.giveSuggestion(previousData[0].getTime(), previousData[1].getTime(), suggestedPlace.name);
+		console.log(suggestedPlace);
+		var location = new Vec2(suggestedPlace.geometry.location.d, suggestedPlace.geometry.location.e);
+		this.main.giveSuggestion(previousData[0].getTime(), previousData[1].getTime(), suggestedPlace.name, location, suggestedPlace.reference);
 	},
 
 	findBestPlaceByRating: function(places){

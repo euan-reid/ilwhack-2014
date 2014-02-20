@@ -29,7 +29,7 @@ var Suggestor = new Class({
 		return events;
 	},
 
-	giveSuggestion: function(from, to, title){
+	giveSuggestion: function(from, to, title, location, reference){
 		var source = [
 				{
 					title: title,
@@ -40,6 +40,8 @@ var Suggestor = new Class({
 					color: '#fff',
 					backgroundColor: '#009fe3',
 					timeFormat: '',
+					location: location,
+					reference: reference,
 					suggestion: true
 				}
 		];
