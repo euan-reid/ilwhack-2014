@@ -159,13 +159,13 @@ var MainClass = new Class({
 				}});
 				request.execute(function(cal) {
 					if (cal && !cal.error) {
-						gapi.client.load('calendar', 'v3', function () {
+						gapi.client.load('calendar', 'v3', function (calId) {
 							var start = new Date();
 							start.setHours(23);
 							var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
-							var req = gapi.client.calendar.events.insert({"resource":{
+							var req = gapi.client.calendar.events.insert({
 								"kind": "calendar#event",
-								"calendarId": cal.id,
+								"calendarId": calId,
 								"summary": "Sleep",
 								"location": "Bed",
 								"start": {
@@ -175,12 +175,12 @@ var MainClass = new Class({
 									"dateTime": timestamp(end)
 								},
 								"recurrence": ["RRULE:FREQ=DAILY"]
-							}});
+							});
 							req.execute(function(resp) {
 								console.log("event creation response");
 								console.log(resp);
 							});
-						});
+						}(cal.id));
 					} else {
 						console.log("calendar not created");
 						console.log(cal);
