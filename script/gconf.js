@@ -45,44 +45,22 @@ function makeApiCall() {
 					li.appendChild(document.createTextNode(resp.items[i].summary));
 					li.appendChild(document.createTextNode(resp.items[i].location));
 					li.appendChild(document.createTextNode(resp.items[i].description));
-					li.appendChild(document.createTextNode(resp.items[i].end));
-					li.appendChild(document.createTextNode(resp.items[i].start));
+					li.appendChild(document.createTextNode(resp.items[i].end.datetime));
+					li.appendChild(document.createTextNode(resp.items[i].start.datetime));
 					document.getElementById('output').appendChild(li);
+					addEvent(resp.items[i].summary, resp.items[i].start.datetime, resp.items[i].end.datetime);
 				}
 			}
 		});
 	});
 };
 
-function renderCalendar(div, eventList){
-		var calendar = $(div).fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
-			},
-			titleFormat: {
-				month: 'MMMM yyyy',
-				week: "d [ MMM]{ '&#8212;' [ d MMM]} yyyy",
-				day: 'dddd, MMM d, yyyy'
-			},
-			firstDay: 1,
-			aspectRatio: 1.6,
-			defaultView: 'agendaWeek',
-			editable: true,
-			dropable: true,
-			
-			eventSources: 
-				[
-					eventList,
-				],
-
-			eventClick: function(event, element) {
-
-		    if(event.title == "lifecal")
-		        	$('#calendar').fullCalendar('updateEvent', event);
-
-		    },
-
-		});
-}
+function addEvent(summary, startTime, endTime){
+	var newEvent = {
+		title: summary, // use the element's text as the event title
+		editable: true, 
+		start: startTime,
+		end: endTime,
+	};
+	$('#calendar').fullCalendar( 'addEventSource', newEvent );
+};
