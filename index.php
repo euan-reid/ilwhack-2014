@@ -28,8 +28,9 @@
 	</head>
 	<body>
 		<div class='header'>
-			<img id="banner" src="/imagery/LifeCal-logo.png" />
-			<hr>
+			<div id="banner">
+				<img src="/imagery/LifeCal-logo.png" />
+			</div>
 		</div>
 
 		<div id="calendar"></div>

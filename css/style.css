@@ -4,13 +4,6 @@ html {
 	height: 100%;
 }
 
-.header > hr{
-	margin: 0 auto 40px auto;
-	padding: 0px;
-	width: 80%;
-	border: ridge 1px #e30613;
-}
-
 body {
 	font-family: 'Noto Sans', sans-serif;
 	color: #333333;
@@ -50,29 +43,31 @@ h1 {
 
 #banner {
 	display: block;
-	margin: 20px auto 0 auto;
-	width: 350px;
+	margin: 20px auto 0 0;
+	text-align: center;
+	width: 150px;
 }
+#banner > img {width: 100%;}
 
 .gmap_canvas {
-    height: 300px;
-    width: 300px;
-    margin: 30px auto;
-    padding: 40px;
-    overflow: none;
-    display: none;
+	height: 300px;
+	width: 300px;
+	margin: 30px auto;
+	padding: 40px;
+	overflow: none;
+	display: none;
 }
 
-.output{
+.output {
 	padding: 30px;
 
 }
 
-#popupBox{
+#popupBox {
 	height: 200px;
-    width: 600px;
-    display:none;
-    background: #ccc;
-    border-radius: 5px;
+	width: 600px;
+	display:none;
+	background: #ccc;
+	border-radius: 5px;
 }
 
