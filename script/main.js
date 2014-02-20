@@ -61,7 +61,7 @@ var MainClass = new Class({
 			
 			eventSources: 
 				[
-					{url: '../php/userData.php'}
+					{url: '/php/userData.php'}
 				],
 
 			eventClick: function(event, element) {
