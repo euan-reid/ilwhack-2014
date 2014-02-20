@@ -153,17 +153,17 @@ var MainClass = new Class({
 	calendarSetup: function(authResult) {
 		if (authResult && !authResult.error) {
 			gapi.client.load('calendar', 'v3', function() {
-				var request = gapi.client.calendar.calendars.insert({
+				var request = gapi.client.calendar.calendars.insert({"resource":{
 					"kind": "calendar#calendar",
 					"summary": "Sleep"
-				});
+				}});
 				request.execute(function(cal) {
 					if (cal && !cal.error) {
 						gapi.client.load('calendar', 'v3', function () {
 							var start = new Date();
 							start.setHours(23);
 							var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
-							var req = gapi.client.calendar.events.insert({
+							var req = gapi.client.calendar.events.insert({"resource":{
 								"kind": "calendar#event",
 								"calendarId": cal.id,
 								"summary": "Sleep",
@@ -175,7 +175,7 @@ var MainClass = new Class({
 									"dateTime": timestamp(end)
 								},
 								"recurrence": ["RRULE:FREQ=DAILY"]
-							});
+							}});
 							req.execute(function(resp) {
 								console.log("event creation response");
 								console.log(resp);
