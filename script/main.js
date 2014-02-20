@@ -213,6 +213,7 @@ var MainClass = new Class({
 					"dateTime": timestamp(end),
 					"timeZone": calendar.timeZone
 				}
+			};
 			if (recur)
 				resource.recurrence = ["RRULE:FREQ=" + recur];
 			if (location)
@@ -220,7 +221,6 @@ var MainClass = new Class({
 			var request = gapi.client.calendar.events.insert({
 				"calendarId": calendar.id,
 				"resource": resource
-				}
 			});
 			request.execute(callback);
 		});
