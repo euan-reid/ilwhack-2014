@@ -1,6 +1,8 @@
 var Locator = new Class({
 	
-	initialize: function(){
+	initialize: function(main){
+		this.main = main;
+
 		this.timesForPlaces = {
 			store: {
 				textKey: 'store',
@@ -90,24 +92,32 @@ var Locator = new Class({
 
 	giveSuggestion_findAllPossiblePlaces: function(data, typeOfPlace){
 		var freeTimeBetweenEvents = function(){
-			this.storedData.freeTime = this.storedData.init[1].getTime()-this.storedData.init[0].getTime()-this.results[0]/60;
+			var timeDifference = this.main.getTimeInMinutesFromMiliseconds(this.storedData.init[1].getTime()-this.storedData.init[0].getTime());
+			console.log(timeDifference);
+			this.storedData.freeTime = timeDifference-this.results[0]/60;
 			this.addResult(null);
 		};
 
-		var timeBetween = Math.abs(data[1].getTime() - data[0].getTime());
+		var callbackFn = function(pass){
+			this.giveSuggestion_findAllPossiblePlacesCallback(data, pass);
+
+		};
+
+		var timeBetween = Math.abs(this.getTimeInMinutesFromMiliseconds(data[1].getTime() - data[0].getTime()));
 		var midpoint = new Vec2((data[0].getX()+data[1].getX())/2, (data[0].getY()+data[1].getY())/2);
 		
-		var action = new Solver(this, data, this.giveSuggestion_findAllPossiblePlacesCallback.bind(this));
+		var action = new Solver(this, data, callbackFn);
 		action.addFunction(this.twoPointsDuration, [data[0].getLocation(), data[1].getLocation()]);
 		action.addFunction(freeTimeBetweenEvents, []);
-		action.addFunction(this.showNearbyPlaces, [midpoint, (timeBetween)*WALKINGSPEEDMETERSPERMINUTE]);
+		console.log('distance: ' + (timeBetween)*WALKINGSPEEDMETERSPERMINUTE);
+		action.addFunction(this.showNearbyPlaces, [midpoint, 250]);
 		action.run();
 
 	},
 
-	giveSuggestion_findAllPossiblePlacesCallback: function(data){
+	giveSuggestion_findAllPossiblePlacesCallback: function(previousData, data){
 		var suggestedPlace = this.findBestPlaceByRating(data[2]);
-		console.log(suggestedPlace);
+		this.main.giveSuggestion(previousData[0].getTime(), previousData[1].getTime(), suggestedPlace.name);
 	},
 
 	findBestPlaceByRating: function(places){
@@ -127,6 +137,10 @@ var Locator = new Class({
 		else
 			return null;
 
+	},
+
+	getTimeInMinutesFromMiliseconds: function(time){
+		return time/(60*1000);
 	},
 
 

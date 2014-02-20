@@ -68,7 +68,7 @@ var LocTime = new Class({
 	},
 
 	setTime: function(time){
-		if(isFinite(time))
+		if(time)
 			this.time = time;
 		else
 			this.time = null;

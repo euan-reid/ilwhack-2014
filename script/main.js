@@ -6,11 +6,7 @@ var MainClass = new Class({
 	ready: function(){
 		this.showCalendar('#calendar');
 
-		var events = $('#calendar').fullCalendar('clientEvents');
-		console.log(events);
-
 		this.suggestor = new Suggestor(this);
-		this.suggestor.findSuggestions();
 
 		/*console.log($('#calendar'));
 
