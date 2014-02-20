@@ -82,13 +82,13 @@ var MainClass = new Class({
 			'gridcolor': 'rgba(20,20,20,0)'
 		});
 		$(div).spidergraph('addlayer', { 
-			'strokecolor': 'rgba(230,204,0,0.8)',
-			'fillcolor': 'rgba(230,204,0,0.6)',
+			'strokecolor': 'rgba(230,0,0,0.8)',
+			'fillcolor': 'rgba(230,0,0,0.6)',
 			'data': [5, 4, 9, 8]
 		});
 		$(div).spidergraph('addlayer', { 
-			'strokecolor': 'rgba(0,204,230,0.8)',
-			'fillcolor': 'rgba(0,204,230,0.6)',
+			'strokecolor': 'rgba(0,0,230,0.8)',
+			'fillcolor': 'rgba(0,0,230,0.6)',
 			'data': [4, 9, 8, 1]
 		});
 	}
