@@ -41,7 +41,10 @@ function makeApiCall() {
 		request.execute(function(resp) {
 			if (resp.items) {
 				for (var i = 0; i < resp.items.length; i++) {
-					addEvent(resp.items[i].summary, resp.items[i].start.dateTime, resp.items[i].end.dateTime);
+					var summary = resp.items[i].summary;
+					var startTime = resp.items[i].start.dateTime ? date : new Date();
+					var endTime = resp.items[i].end.dateTime ? date : new Date();
+					addEvent(summary, startTime, dateTime);
 					var li = document.createElement('li');
 					li.appendChild(document.createTextNode(resp.items[i].summary));
 					li.appendChild(document.createTextNode(resp.items[i].location));
