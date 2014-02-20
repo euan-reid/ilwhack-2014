@@ -8,9 +8,10 @@
 		<!--CSS-->
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
 		<link rel="stylesheet" type="text/css" href="/css/fullcalendar.css">
-		<link rel="stylesheet" type="text/css" href="/css/avgrund.css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
   
+		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css">
 
 		<!--Script-->
 		
@@ -31,7 +32,6 @@
 		<script src="/script/locator.js"></script>
 		<script src="/script/suggestor.js"></script>
 		<script src="/script/structures.js"></script>
-
 
 	</head>
 	<body>
