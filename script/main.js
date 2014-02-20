@@ -25,6 +25,8 @@ var timestamp = function (date) {
 		+ ":" + this.pad(Math.abs(offset) % 60, 2);
 }
 
+var calendarIds = {};
+
 var MainClass = new Class({
 	
 	initialize: function(){
