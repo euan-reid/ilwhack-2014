@@ -93,7 +93,6 @@ var Locator = new Class({
 	giveSuggestion_findAllPossiblePlaces: function(data, typeOfPlace){
 		var freeTimeBetweenEvents = function(){
 			var timeDifference = this.main.getTimeInMinutesFromMiliseconds(this.storedData.init[1].getTime()-this.storedData.init[0].getTime());
-			console.log(timeDifference);
 			this.storedData.freeTime = timeDifference-this.results[0]/60;
 			this.addResult(null);
 		};

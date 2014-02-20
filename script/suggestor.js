@@ -39,7 +39,8 @@ var Suggestor = new Class({
 					editable: false,
 					color: '#fff',
 					backgroundColor: '#009fe3',
-					timeFormat: ''
+					timeFormat: '',
+					suggestion: true
 				}
 		];
 

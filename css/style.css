@@ -88,7 +88,7 @@ h1 {
 #popupBox {
 	height: 200px;
 	width: 600px;
-	display:none;
+	/*display:none;
 	background: #ccc;
 	border-radius: 5px;
 }

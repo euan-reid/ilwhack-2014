@@ -7,17 +7,34 @@ var MainClass = new Class({
 		this.showCalendar('#calendar');
 
 		this.suggestor = new Suggestor(this);
-		
+
 		this.drawSpiderGraph('#spidergraph');
 
-		/*console.log($('#calendar'));
 
-		   $('#popupBox').bPopup({
-            fadeSpeed: 'slow', 
-            followSpeed: 1500, 
-            modal: false
-            //modalColor: 'white'
+		/*$('#popupBox').bPopup({
+            fadeSpeed: 'slow',
+            followSpeed: 1500,
+            //modal: false
         });*/
+	},
+
+	makeEventReal: function(event){
+		var source = [
+				{
+					title: event.title,
+					start: event.start,
+					end: event.end,
+					allDay: false,
+					editable: false,
+					textColor: '#000',
+					backgroundColor: '#fff',
+					timeFormat: '',
+					suggestion: false
+				}
+		];
+
+		$('#calendar').fullCalendar( 'removeEvents', event._id );
+		$('#calendar').fullCalendar( 'addEventSource', source );
 	},
 
 	showCalendar: function(div){
@@ -63,11 +80,15 @@ var MainClass = new Class({
 				],
 
 			eventClick: function(event, element) {
+				console.log(event);
 
-		        if(event.title == "lifecal")
+		        if(event.suggestion == true){
+		        	this.makeEventReal(event);
+
 		        	$('#calendar').fullCalendar('updateEvent', event);
+		        }
 
-		    },
+		    }.bind(this),
 
 		});
 	},
