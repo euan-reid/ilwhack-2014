@@ -160,13 +160,13 @@ var MainClass = new Class({
 							"dateTime": this.timestamp(end)
 						},
 						"recurrence": ["RRULE:FREQ=DAILY"]
-					}.bind(this));
+					});
 					req.execute(function(resp) {
 						console.log(resp);
 					});
-				});
+				}.bind(this));
 			});
-		});
+		}.bind(this));
 	}
 
 });
