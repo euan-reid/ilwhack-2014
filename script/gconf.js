@@ -80,4 +80,4 @@ function renderCalendar(div, eventList){
 		    },
 
 		});
-	},
+	}
