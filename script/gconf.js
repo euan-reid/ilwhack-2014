@@ -24,7 +24,7 @@ function handleAuthResult(authResult) {
 	if (authResult && !authResult.error) {
 		setInterval(loadCalendarIds, 60000);
 		loadCalendarIds();
-		setTimeout($.proxy(Main.fetchRemoteCalendarEvents, this), 2000);
+		Main.fetchRemoteCalendarEvents();
 	} else {
 		authorizeButton.onclick = handleAuthClick;
 	}
