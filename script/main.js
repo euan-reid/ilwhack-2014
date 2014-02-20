@@ -82,12 +82,14 @@ var MainClass = new Class({
 		}.bind(this));
 
 		$('#eventInfoButtons_no').click(function(){
+			this.removeEvent(event);
 			$( "#popUpDialog" ).dialog( "close" );
-		});
+		}.bind(this));
 
 		$('#eventInfoButtons_never').click(function(){
+			this.removeEvent(event);
 			$( "#popUpDialog" ).dialog( "close" );
-		});
+		}.bind(this));
 		
 
 		$(function() {
@@ -149,6 +151,11 @@ var MainClass = new Class({
 
 		$('#calendar').fullCalendar( 'removeEvents', event._id );
 		$('#calendar').fullCalendar( 'addEventSource', source );
+	},
+
+	removeEvent: function(event){
+		$('#calendar').fullCalendar( 'removeEvents', event._id );
+
 	},
 
 	showCalendar: function(div){
