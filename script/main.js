@@ -75,6 +75,23 @@ var MainClass = new Class({
 
 		});
 	},
+	
+	drawSpiderGraph: function(div){
+		$(div).spidergraph({
+			'fields': ['live','work','play','rest'],
+			'gridcolor': 'rgba(20,20,20,1)'
+		});
+		$(div).spidergraph('addlayer', { 
+			'strokecolor': 'rgba(230,204,0,0.8)',
+			'fillcolor': 'rgba(230,204,0,0.6)',
+			'data': [5, 4, 9, 8]
+		});
+		$(div).spidergraph('addlayer', { 
+			'strokecolor': 'rgba(230,204,230,0.8)',
+			'fillcolor': 'rgba(230,204,230,0.6)',
+			'data': [4, 9, 8, 1]
+		});
+	},
 
 });
 
