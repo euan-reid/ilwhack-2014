@@ -197,28 +197,33 @@ var MainClass = new Class({
 				}});
 				request.execute(function(cal) {
 					if (cal && !cal.error) {
-						gapi.client.load('calendar', 'v3', function (calId) {
+						gapi.client.load('calendar', 'v3', function (calendar) {
 							var start = new Date();
-							start.setHours(23);
+							start.setHours(23,0,0,0);
 							var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
+							console.log(cal.timeZone);
 							var req = gapi.client.calendar.events.insert({
-								"kind": "calendar#event",
-								"calendarId": calId,
-								"summary": "Sleep",
-								"location": "Bed",
-								"start": {
-									"dateTime": timestamp(start)
-								},
-								"end": {
-									"dateTime": timestamp(end)
-								},
-								"recurrence": ["RRULE:FREQ=DAILY"]
+								"calendarId": calendar.id,
+								"resource": {
+									"kind": "calendar#event",
+									"summary": "Sleep",
+									"location": "Bed",
+									"start": {
+										"dateTime": timestamp(start),
+										"timeZone": calendar.timeZone
+									},
+									"end": {
+										"dateTime": timestamp(end),
+										"timeZone": calendar.timeZone
+									},
+									"recurrence": ["RRULE:FREQ=DAILY"]
+								}
 							});
 							req.execute(function(resp) {
 								console.log("event creation response");
 								console.log(resp);
 							});
-						}(cal.id));
+						}(cal));
 					} else {
 						console.log("calendar not created");
 						console.log(cal);
