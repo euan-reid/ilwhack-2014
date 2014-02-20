@@ -226,43 +226,61 @@ var MainClass = new Class({
 
 	},
 	
+	addGCalendar: function (calName, callback) {
+		gapi.client.load('calendar', 'v3', function () {
+			var tz = jstz.determine();
+			var request = gapi.client.calendar.calendars.insert({"resource":{
+				"kind": "calendar#calendar",
+				"summary": calName,
+				"timeZone": tz.name()
+			}});
+			request.execute(callback);
+		});
+	},
+	
+	addEvent: function (calendar, title, start, end, callback, recur, location) {
+		gapi.client.load('calendar', 'v3', function () {
+			var resource = {
+				"kind": "calendar#event",
+				"summary": title,
+				"start": {
+					"dateTime": timestamp(start),
+					"timeZone": calendar.timeZone
+				},
+				"end": {
+					"dateTime": timestamp(end),
+					"timeZone": calendar.timeZone
+				}
+			};
+			if (recur)
+				resource.recurrence = ["RRULE:FREQ=" + recur];
+			if (location)
+				resource.location = location;
+			var request = gapi.client.calendar.events.insert({
+				"calendarId": calendar.id,
+				"resource": resource
+			});
+			request.execute(callback);
+		});
+	},
+	
 	calendarSetup: function(authResult) {
 		if (authResult && !authResult.error) {
-			gapi.client.load('calendar', 'v3', function() {
-				var request = gapi.client.calendar.calendars.insert({"resource":{
-					"kind": "calendar#calendar",
-					"summary": "Sleep"
-				}});
-				request.execute(function(cal) {
-					if (cal && !cal.error) {
-						gapi.client.load('calendar', 'v3', function (calId) {
-							var start = new Date();
-							start.setHours(23);
-							var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
-							var req = gapi.client.calendar.events.insert({
-								"kind": "calendar#event",
-								"calendarId": calId,
-								"summary": "Sleep",
-								"location": "Bed",
-								"start": {
-									"dateTime": timestamp(start)
-								},
-								"end": {
-									"dateTime": timestamp(end)
-								},
-								"recurrence": ["RRULE:FREQ=DAILY"]
-							});
-							req.execute(function(resp) {
-								console.log("event creation response");
-								console.log(resp);
-							});
-						}(cal.id));
-					} else {
-						console.log("calendar not created");
-						console.log(cal);
-					}
-				});
-			});
+			var addSleepEvent = function (cal) {
+				if (cal && !cal.error) {
+					var start = new Date();
+					start.setHours(23,0,0,0);
+					var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
+					Main.addEvent(cal, "Sleep", start, end, function(resp) {
+						console.log("event creation response");
+						console.log(resp);
+					}, "DAILY", "Bed");
+				} else {
+					console.log("calendar not created");
+					console.log(cal);
+				}
+			}
+			Main.addGCalendar("Sleep", addSleepEvent);
 		} else {
 			console.log("authorisation error");
 			console.log(authResult);

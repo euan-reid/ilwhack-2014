@@ -41,7 +41,11 @@ function makeApiCall() {
 		request.execute(function(resp) {
 			if (resp.items) {
 				for (var i = 0; i < resp.items.length; i++) {
-					addEvent(resp.items[i].summary, resp.items[i].start.dateTime, resp.items[i].end.dateTime);
+					var calendarItem = resp.items[i]; 
+					var summary = calendarItem.summary;
+					var startTime = calendarItem.start.dateTime ? calendarItem.start.dateTime : new Date();
+					var endTime = !calendarItem.endTimeUnspecified ? calendarItem.end.dateTime : new Date();
+					addEvent(summary, startTime, endTime);
 					var li = document.createElement('li');
 					li.appendChild(document.createTextNode(resp.items[i].summary));
 					li.appendChild(document.createTextNode(resp.items[i].location));
@@ -59,8 +63,8 @@ function addEvent(summary, startTime, endTime){
 	var newEvent = [{
 		title: summary, // use the element's text as the event title
 		editable: true, 
-		start: timestamp(startTime),
-		end: timestamp(endTime),
+		start: Date.parse(startTime),
+		end: Date.parse(endTime),
 	}];
 	$('#calendar').fullCalendar( 'addEventSource', newEvent );
 	$('#calendar').fullCalendar( 'renderEvent', newEvent , true );
