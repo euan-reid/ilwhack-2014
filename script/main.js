@@ -136,23 +136,31 @@ var MainClass = new Class({
 		}
 	},
 
-	makeEventReal: function(event){
-		var source = [
-				{
-					title: event.title,
-					start: event.start,
-					end: event.end,
-					allDay: false,
-					editable: false,
-					textColor: '#000',
-					backgroundColor: '#fff',
-					timeFormat: '',
-					suggestion: false
-				}
-		];
+	makeEventReal: function(event, calendar){
+		calendar = "Social"; // Assuming social
+		var gCal = getCalendar(calendar);
+			if (gCal) {
+			var source = [
+					{
+						title: event.title,
+						start: event.start,
+						end: event.end,
+						allDay: false,
+						editable: false,
+						textColor: '#000',
+						backgroundColor: '#fff',
+						timeFormat: '',
+						suggestion: false
+					}
+			];
 
-		$('#calendar').fullCalendar( 'removeEvents', event._id );
-		$('#calendar').fullCalendar( 'addEventSource', source );
+			$('#calendar').fullCalendar( 'removeEvents', event._id );
+			$('#calendar').fullCalendar( 'addEventSource', source );
+			addEvent(gCal, event.title, new Date(event.start), new Date(event.end), function (ev){console.log(ev);});
+		} else {
+			console.log("failed to add event - could not get calendar " + calendar);
+			console.log(event);
+		}
 	},
 
 	removeEvent: function(event){
@@ -353,6 +361,7 @@ var MainClass = new Class({
 			Main.addGCalendar("Learning", blankCalCallback);
 			Main.addGCalendar("Exercise", blankCalCallback);
 			Main.addGCalendar("Social", blankCalCallback);
+			setInterval(loadCalendarIds, 60000);
 		} else {
 			console.log("authorisation error");
 			console.log(authResult);

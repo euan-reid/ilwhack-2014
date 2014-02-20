@@ -23,23 +23,31 @@ function handleAuthResult(authResult) {
 	var authorizeButton = document.getElementById('banner');
 	if (authResult && !authResult.error) {
 		authorizeButton.onclick = null;
-		gapi.client.load('calendar', 'v3', function () {
-			var request = gapi.client.calendar.calendarList.list({"minAccessRole": "reader"});
-			request.execute(function (resp) {
-				if (resp && !resp.error) {
-					for (var i = 0; i < resp.items.length; i++) {
-						calendarIds[resp.items[i].summary] = resp.items[i].id;
-					}
-				} else {
-					console.log("Couldn't load calendars");
-					console.log(resp);
-				}
-			});
-		});
+		setInterval(loadCalendarIds, 60000);
 		makeApiCall();
 	} else {
 		authorizeButton.onclick = handleAuthClick;
 	}
+}
+
+function loadCalendarIds() {
+	gapi.client.load('calendar', 'v3', function () {
+		var request = gapi.client.calendar.calendarList.list({"minAccessRole": "reader"});
+		request.execute(function (resp) {
+			if (resp && !resp.error) {
+				for (var i = 0; i < resp.items.length; i++) {
+					calendarIds[resp.items[i].summary] = resp.items[i].id;
+				}
+			} else {
+				console.log("Couldn't load calendars");
+				console.log(resp);
+			}
+		});
+	});
+}
+
+function getCalendar(calendar) {
+	return gapi.client.calendar.calendars.get(calendarIds[calendar]);
 }
 
 function handleAuthClick(event) {
