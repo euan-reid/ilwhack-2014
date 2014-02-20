@@ -57,7 +57,7 @@ var MainClass = new Class({
 						var eventData = {
 							title: resp.items[i].summary,
 							start: (resp.items[i] && resp.items[i].start && resp.items[i].start.dateTime) ? (resp.items[i].start.dateTime) : (new Date()),
-							end: resp.items[i].end.dateTime,
+							end: (resp.items[i] && resp.items[i].end && resp.items[i].end.dateTime) ? (resp.items[i].end.dateTime) : (new Date()),
 							location: (resp.items[i].location!=null) ? resp.items[i].location : null,
 							backgroundColor: '#fff',
 							textColor: '#333',
