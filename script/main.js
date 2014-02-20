@@ -72,7 +72,7 @@ var MainClass = new Class({
 						importData.push(eventData);
 					}
 
-					this.showCalendar('#calendar', importData);
+					Main.showCalendar('#calendar', importData);
 					} else {
 						console.log("Failed to retrieve events from " + calendarIds[key]);
 						console.log(resp.error);
