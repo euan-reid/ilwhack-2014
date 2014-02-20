@@ -44,8 +44,40 @@ function makeApiCall() {
 				li.appendChild(document.createTextNode(resp.items[i].summary));
 				document.getElementById('output').appendChild(li);
 			}
-			Main.renderCalendar('#calendar', resp.items);
+			renderCalendar('#calendar', resp.items);
 		});
 	});
 };
 
+function renderCalendar(div, eventList){
+		var calendar = $(div).fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			titleFormat: {
+				month: 'MMMM yyyy',
+				week: "d [ MMM]{ '&#8212;' [ d MMM]} yyyy",
+				day: 'dddd, MMM d, yyyy'
+			},
+			firstDay: 1,
+			aspectRatio: 1.6,
+			defaultView: 'agendaWeek',
+			editable: true,
+			dropable: true,
+			
+			eventSources: 
+				[
+					eventList,
+				],
+
+			eventClick: function(event, element) {
+
+		    if(event.title == "lifecal")
+		        	$('#calendar').fullCalendar('updateEvent', event);
+
+		    },
+
+		});
+	},
