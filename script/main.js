@@ -27,7 +27,7 @@ var MainClass = new Class({
 		*/
 		date = date ? date : new Date();
 		var offset = date.getTimezoneOffset();
-		pad = function (amount, width ){
+		this.pad = function (amount, width ){
 			var padding = "";
 			while (padding.length < width - 1 && amount < Math.pow(10, width - padding.length - 1))
 			padding += "0";
