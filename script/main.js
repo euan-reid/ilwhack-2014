@@ -10,12 +10,23 @@ var MainClass = new Class({
 
 		this.drawSpiderGraph('#spidergraph');
 
+		/*$(function() {
+			$( "#dialog" ).dialog();
+		});*/
 
-		/*$('#popupBox').bPopup({
+			/*$('#popupBox').bPopup({
             fadeSpeed: 'slow',
             followSpeed: 1500,
             //modal: false
         });*/
+	},
+
+	showPopUp: function(){
+		$( "#popUpDialog" ).html("<input type='button' value='yes'>");
+
+		$(function() {
+			$( "#popUpDialog" ).dialog();
+		});
 	},
 
 	makeEventReal: function(event){
@@ -83,9 +94,9 @@ var MainClass = new Class({
 				console.log(event);
 
 		        if(event.suggestion == true){
-		        	this.makeEventReal(event);
+		        	this.showPopUp();
 
-		        	$('#calendar').fullCalendar('updateEvent', event);
+		        	//$('#calendar').fullCalendar('updateEvent', event);
 		        }
 
 		    }.bind(this),
@@ -93,21 +104,21 @@ var MainClass = new Class({
 		});
 	},
 	
-	drawSpiderGraph: function(div){
-		$(div).spidergraph({
+	drawSpiderGraph: function(diva){
+		$(diva).spidergraph({
 			'fields': ['live','work','play','rest'],
 			'gridcolor': 'rgba(20,20,20,0)'
 		});
-		$(div).spidergraph('addlayer', { 
+		/*$(diva).spidergraph('addlayer', { 
 			'strokecolor': 'rgba(230,230,230,0.8)',
 			'fillcolor': 'rgba(0,0,0,0)',
 			'data': [9, 14, 19, 13]
 		});
-		$(div).spidergraph('addlayer', { 
+		$(diva).spidergraph('addlayer', { 
 			'strokecolor': 'rgba(0,0,0,0)',
 			'fillcolor': 'rgba(0,0,230,0.6)',
 			'data': [4, 9, 8, 1]
-		});
+		});*/
 	}
 
 });
@@ -117,5 +128,7 @@ var Main = new MainClass();
 
 $(document).ready(function() {
 	Main.ready();
+
+  	
 
 }).bind(this);
