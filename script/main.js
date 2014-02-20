@@ -56,7 +56,7 @@ var MainClass = new Class({
 					for (var i = 0; i < resp.items.length; i++) {
 						var eventData = {
 							title: resp.items[i].summary,
-							start: resp.items[i].start.dateTime,
+							start: (resp.items[i] && resp.items[i].start && resp.items[i].start.dateTime) ? (resp.items[i].start.dateTime) : (new Date()),
 							end: resp.items[i].end.dateTime,
 							location: (resp.items[i].location!=null) ? resp.items[i].location : null,
 							backgroundColor: '#fff',
