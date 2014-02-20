@@ -23,7 +23,8 @@ function handleAuthResult(authResult) {
 	var authorizeButton = document.getElementById('banner');
 	if (authResult && !authResult.error) {
 		setInterval(loadCalendarIds, 60000);
-		Main.fetchRemoteCalendarEvents();
+		loadCalendarIds();
+		setTimeout($.proxy(Main.fetchRemoteCalendarEvents, this), 1000);
 	} else {
 		authorizeButton.onclick = handleAuthClick;
 	}
