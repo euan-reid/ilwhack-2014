@@ -42,6 +42,10 @@ function makeApiCall() {
 			for (var i = 0; i < resp.items.length; i++) {
 				var li = document.createElement('li');
 				li.appendChild(document.createTextNode(resp.items[i].summary));
+				li.appendChild(document.createTextNode(resp.items[i].location));
+				li.appendChild(document.createTextNode(resp.items[i].description));
+				li.appendChild(document.createTextNode(resp.items[i].end));
+				li.appendChild(document.createTextNode(resp.items[i].start));
 				document.getElementById('output').appendChild(li);
 			}
 		});
@@ -79,4 +83,4 @@ function renderCalendar(div, eventList){
 		    },
 
 		});
-	}
+}
