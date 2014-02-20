@@ -24,7 +24,7 @@ function handleAuthResult(authResult) {
 	if (authResult && !authResult.error) {
 		setInterval(loadCalendarIds, 60000);
 		loadCalendarIds();
-		setTimeout(Main.fetchRemoteCalendarEvents, 1000);
+		setTimeout(fetchRemoteCalendarEvents, 1000).bind(Main);
 	} else {
 		authorizeButton.onclick = handleAuthClick;
 	}
