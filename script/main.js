@@ -233,6 +233,9 @@ var MainClass = new Class({
 
 	},
 	
+	// Parameters:
+	//	calName: string name to be used for new calendar
+	//	callback: callback function, must accept a calendar resource (https://developers.google.com/google-apps/calendar/v3/reference/calendars)
 	addGCalendar: function (calName, callback) {
 		gapi.client.load('calendar', 'v3', function () {
 			var tz = jstz.determine();
@@ -245,6 +248,15 @@ var MainClass = new Class({
 		});
 	},
 	
+	// Parameters:
+	//	calendar: calendar resource (link above) - must have an id and a timeZone
+	//	title: string title for event
+	//	start: javascript Date() object representing event start time
+	//	end: javascript Date() object representing event end time
+	//	callback: callback function, must accept a event resource (https://developers.google.com/google-apps/calendar/v3/reference/events)
+	//	recur (optional): string declaring frequency of recurrence - will be appending to RRULE:FREQ= and must obey RFC 5545 sec. 3.3.10
+	//										(http://tools.ietf.org/html/rfc5545#section-3.3.10)
+	//	location (optional): string location for event
 	addEvent: function (calendar, title, start, end, callback, recur, location) {
 		gapi.client.load('calendar', 'v3', function () {
 			var resource = {
@@ -279,15 +291,49 @@ var MainClass = new Class({
 					start.setHours(23,0,0,0);
 					var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
 					Main.addEvent(cal, "Sleep", start, end, function(resp) {
-						console.log("event creation response");
+						console.log("Sleep event creation response");
 						console.log(resp);
 					}, "DAILY", "Bed");
 				} else {
-					console.log("calendar not created");
+					console.log("Sleep calendar not created");
 					console.log(cal);
 				}
 			}
 			Main.addGCalendar("Sleep", addSleepEvent);
+			var addEatEvents = function (cal) {
+				if (cal && !cal.error) {
+					var start = new Date();
+					var end = new Date();
+					
+					// Breakfast
+					start.setHours(7,30,0,0);
+					end.setHours(8,0,0,0);
+					Main.addEvent(cal, "Breakfast", start, end, function(resp) {
+						console.log("Breakfast event creation response");
+						console.log(resp);
+					}, "DAILY");
+					
+					// Lunch
+					start.setHours(12,30,0,0);
+					end.setHours(13,0,0,0);
+					Main.addEvent(cal, "Lunch", start, end, function(resp) {
+						console.log("Lunch event creation response");
+						console.log(resp);
+					}, "DAILY");
+					
+					// Dinner
+					start.setHours(18,0,0,0);
+					end.setHours(19,0,0,0);
+					Main.addEvent(cal, "Dinner", start, end, function(resp) {
+						console.log("Dinner event creation response");
+						console.log(resp);
+					}, "DAILY");
+				} else {
+					console.log("Eat calendar not created");
+					console.log(cal);
+				}
+			}
+			Main.addGCalendar("Eat", addEatEvents);
 		} else {
 			console.log("authorisation error");
 			console.log(authResult);
