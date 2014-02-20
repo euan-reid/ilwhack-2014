@@ -138,6 +138,7 @@ var MainClass = new Class({
 	},
 	
 	calendarSetup: function() {
+		var that = this;
 		gapi.client.load('calendar', 'v3', function() {
 			var request = gapi.client.calendar.calendars.insert({
 				"kind": "calendar#calendar",
@@ -154,19 +155,19 @@ var MainClass = new Class({
 						"summary": "Sleep",
 						"location": "Bed",
 						"start": {
-							"dateTime": timestamp(start)
+							"dateTime": that.timestamp(start)
 						},
 						"end": {
-							"dateTime": timestamp(end)
+							"dateTime": that.timestamp(end)
 						},
 						"recurrence": ["RRULE:FREQ=DAILY"]
 					});
 					req.execute(function(resp) {
 						console.log(resp);
 					});
-				}.bind(this));
-			}.bind(this));
-		}.bind(this));
+				});
+			});
+		});
 	}
 
 });
