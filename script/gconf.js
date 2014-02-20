@@ -59,9 +59,9 @@ function addEvent(summary, startTime, endTime){
 	var newEvent = [{
 		title: summary, // use the element's text as the event title
 		editable: true, 
-		start: timestamp(startTime),
-		end: timestamp(endTime),
+		start: Date.parse(startTime),
+		end: Date.parse(endTime),
 	}];
-	$('#calendar').fullCalendar( 'addEventSource', newEvent );
+	// $('#calendar').fullCalendar( 'addEventSource', newEvent );
 	$('#calendar').fullCalendar( 'renderEvent', newEvent , true );
 };
