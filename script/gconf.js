@@ -23,17 +23,23 @@ function handleAuthResult(authResult) {
 	var authorizeButton = document.getElementById('banner');
 	if (authResult && !authResult.error) {
 		setInterval(loadCalendarIds, 60000);
-		loadCalendarIds(function (fetchCall, resp) {
-			if (resp && !resp.error) {
-				for (var i = 0; i < resp.items.length; i++) {
-					calendarIds[resp.items[i].summary] = resp.items[i].id;
+
+		function callbackMaker (fetchCall) {
+			function callback (resp) {
+				if (resp && !resp.error) {
+					for (var i = 0; i < resp.items.length; i++) {
+						calendarIds[resp.items[i].summary] = resp.items[i].id;
+					}
+					fetchCall();
+				} else {
+					console.log("Couldn't load calendars");
+					console.log(resp);
 				}
-				fetchCall();
-			} else {
-				console.log("Couldn't load calendars");
-				console.log(resp);
 			}
-		}(Main.fetchRemoteCalendarEvents));
+			return callback;
+		}
+
+		loadCalendarIds(callbackMaker(Main.fetchRemoteCalendarEvents));
 	} else {
 		authorizeButton.onclick = handleAuthClick;
 	}
