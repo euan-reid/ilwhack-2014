@@ -4,7 +4,7 @@ html {
 	height: 100%;
 }
 
-hr{
+.head > hr{
 	margin: 0 auto 40px auto;
 	padding: 0px;
 	width: 80%;
@@ -51,6 +51,7 @@ h1 {
 #banner {
 	display: block;
 	margin: 20px auto 0 auto;
+	width: 350px;
 }
 
 .gmap_canvas {
