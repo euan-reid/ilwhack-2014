@@ -51,7 +51,7 @@ var MainClass = new Class({
 		gapi.client.load('calendar', 'v3', function() {
 			var importData = new Array();
 			var locator = new Locator();
-			
+
 			for (key in calendarIds) {
 				if (typeof calendarIds[key] != "string")
 					continue;
@@ -59,8 +59,10 @@ var MainClass = new Class({
 					'calendarId': calendarIds[key],
 					'timeMin': '2014-02-15T12:00:00-00:00'
 				})
-				request.execute(function(resp) {
+				request.execute(function(key, resp) {
 					if (resp && !resp.error && resp.items) {
+						console.log(key);
+						console.log(resp.items);
 						for (var i = 0; i < resp.items.length; i++) {
 							var eventData = {
 								title: resp.items[i].summary,
@@ -77,10 +79,10 @@ var MainClass = new Class({
 							importData.push(eventData);
 						}
 					} else {
-						console.log("Failed to retrieve events from " + calendarIds[key]);
-						console.log(resp.error);
+						console.log("Failed to retrieve events from " + key);
+						console.log(resp);
 					}
-				});
+				}(key));
 			}
 
 			Main.showCalendar('#calendar', importData);
@@ -208,6 +210,7 @@ var MainClass = new Class({
 	showCalendar: function(div, importData){
 		console.log('CALENDAR!');
 		console.log(importData);
+
 		var calendar = $(div).fullCalendar({
 			header: {
 				left: 'prev,next today',
@@ -244,27 +247,21 @@ var MainClass = new Class({
 			editable: true,
 			dropable: true,
 			
-			eventSources:
-				[
-					/*{url: '/php/userData.php'}*/
-					{events: importData}
-				],
+			events: importData,/*{url: '/php/userData.php'}*/
 
 			eventClick: function(event, element) {
 				console.log(event);
 
-		        if(event.suggestion == true){
-		        	this.showPopUp(event);
-
-		        	//$('#calendar').fullCalendar('updateEvent', event);
-		        }
-
-		    }.bind(this),
+				if(event.suggestion == true){
+					this.showPopUp(event);
+					//$('#calendar').fullCalendar('updateEvent', event);
+				}
+			}.bind(this),
 
 		});
 
+		$(div).fullCalendar('rerenderEvents');
 		this.calendarLoaded();
-		
 	},
 	
 	drawSpiderGraph: function(diva){
