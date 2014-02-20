@@ -1,5 +1,5 @@
-var clientId = '182653051318';
-var apiKey = 'AIzaSyCojj5ZHvVx1njVabv5TfE1zETZlAKaQTA';
+var clientId = '400024507226';
+var apiKey = 'AIzaSyB33EV0puEFY73thEKJFch-04qI8-85Fvg';
 var scopes = 'https://www.googleapis.com/auth/calendar';
 
 var WALKINGSPEEDMETERSPERMINUTE = 83.3;
