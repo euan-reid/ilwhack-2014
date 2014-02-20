@@ -41,6 +41,7 @@ function makeApiCall() {
 		request.execute(function(resp) {
 			if (resp.items) {
 				for (var i = 0; i < resp.items.length; i++) {
+					addEvent(resp.items[i].summary, resp.items[i].start.datetime, resp.items[i].end.datetime);
 					var li = document.createElement('li');
 					li.appendChild(document.createTextNode(resp.items[i].summary));
 					li.appendChild(document.createTextNode(resp.items[i].location));
@@ -48,7 +49,6 @@ function makeApiCall() {
 					li.appendChild(document.createTextNode(resp.items[i].end.datetime));
 					li.appendChild(document.createTextNode(resp.items[i].start.datetime));
 					document.getElementById('output').appendChild(li);
-					addEvent(resp.items[i].summary, resp.items[i].start.datetime, resp.items[i].end.datetime);
 				}
 			}
 		});
@@ -56,11 +56,11 @@ function makeApiCall() {
 };
 
 function addEvent(summary, startTime, endTime){
-	var newEvent = {
+	var newEvent = [{
 		title: summary, // use the element's text as the event title
 		editable: true, 
 		start: startTime,
 		end: endTime,
-	};
+	}];
 	$('#calendar').fullCalendar( 'addEventSource', newEvent );
 };
