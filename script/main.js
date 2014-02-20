@@ -191,9 +191,11 @@ var MainClass = new Class({
 	calendarSetup: function(authResult) {
 		if (authResult && !authResult.error) {
 			gapi.client.load('calendar', 'v3', function() {
+				var tz = jstz.determine();
 				var request = gapi.client.calendar.calendars.insert({"resource":{
 					"kind": "calendar#calendar",
-					"summary": "Sleep"
+					"summary": "Sleep",
+					"timeZone": tz.name()
 				}});
 				request.execute(function(cal) {
 					if (cal && !cal.error) {
