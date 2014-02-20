@@ -22,7 +22,6 @@ function checkAuth() {
 function handleAuthResult(authResult) {
 	var authorizeButton = document.getElementById('banner');
 	if (authResult && !authResult.error) {
-<<<<<<< HEAD
 		authorizeButton.onclick = null;
 		setInterval(loadCalendarIds, 60000);
 		Main.fetchRemoteCalendarEvents();
