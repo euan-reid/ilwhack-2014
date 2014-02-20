@@ -199,22 +199,24 @@ var MainClass = new Class({
 					if (cal && !cal.error) {
 						gapi.client.load('calendar', 'v3', function (calId) {
 							var start = new Date();
-							start.setHours(23);
+							start.setHours(23,0,0,0);
 							var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
 							console.log(end);
 							console.log(timestamp(end));
 							var req = gapi.client.calendar.events.insert({
-								"kind": "calendar#event",
 								"calendarId": calId,
-								"summary": "Sleep",
-								"location": "Bed",
-								"start": {
-									"dateTime": timestamp(start)
-								},
-								"end": {
-									"dateTime": timestamp(end)
-								},
-								"recurrence": ["RRULE:FREQ=DAILY"]
+								"resource": {
+									"kind": "calendar#event",
+									"summary": "Sleep",
+									"location": "Bed",
+									"start": {
+										"dateTime": timestamp(start)
+									},
+									"end": {
+										"dateTime": timestamp(end)
+									},
+									"recurrence": ["RRULE:FREQ=DAILY"]
+								}
 							});
 							req.execute(function(resp) {
 								console.log("event creation response");
