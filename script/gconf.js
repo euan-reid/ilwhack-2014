@@ -62,6 +62,6 @@ function addEvent(summary, startTime, endTime){
 		start: Date.parse(startTime),
 		end: Date.parse(endTime),
 	}];
-	// $('#calendar').fullCalendar( 'addEventSource', newEvent );
+	$('#calendar').fullCalendar( 'addEventSource', newEvent );
 	$('#calendar').fullCalendar( 'renderEvent', newEvent , true );
 };
