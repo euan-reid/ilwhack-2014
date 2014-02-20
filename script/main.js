@@ -308,7 +308,9 @@ var MainClass = new Class({
 					// Breakfast
 					start.setHours(7,30,0,0);
 					end.setHours(8,0,0,0);
-					Main.addEvent(cal, "Breakfast", start, end, function(resp) {
+					var startB = start;
+					var endB = end;
+					Main.addEvent(cal, "Breakfast", startB, endB, function(resp) {
 						console.log("Breakfast event creation response");
 						console.log(resp);
 					}, "DAILY");
@@ -316,7 +318,9 @@ var MainClass = new Class({
 					// Lunch
 					start.setHours(12,30,0,0);
 					end.setHours(13,0,0,0);
-					Main.addEvent(cal, "Lunch", start, end, function(resp) {
+					var startL = start;
+					var endL = end;
+					Main.addEvent(cal, "Lunch", startL, endL, function(resp) {
 						console.log("Lunch event creation response");
 						console.log(resp);
 					}, "DAILY");
