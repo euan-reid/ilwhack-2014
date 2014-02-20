@@ -73,6 +73,39 @@ var MainClass = new Class({
 
 		});
 	},
+	
+	renderCalendar: function(div, eventList){
+		var calendar = $(div).fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			titleFormat: {
+				month: 'MMMM yyyy',
+				week: "d [ MMM]{ '&#8212;' [ d MMM]} yyyy",
+				day: 'dddd, MMM d, yyyy'
+			},
+			firstDay: 1,
+			aspectRatio: 1.6,
+			defaultView: 'agendaWeek',
+			editable: true,
+			dropable: true,
+			
+			eventSources: 
+				[
+					eventList,
+				],
+
+			eventClick: function(event, element) {
+
+		    if(event.title == "lifecal")
+		        	$('#calendar').fullCalendar('updateEvent', event);
+
+		    },
+
+		});
+	},
 
 });
 
