@@ -18,13 +18,12 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/gcal.js"></script>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 		<script src="/script/gconf.js"></script>
-		<script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script>
-		<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 		<script src="/script/jquery.spidergraph.js"></script>
 		<script src="/script/main.js"></script>
 		<script src="/script/locator.js"></script>
 		<script src="/script/suggestor.js"></script>
 		<script src="/script/structures.js"></script>
+		<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 		
 	</head>
 	<body>

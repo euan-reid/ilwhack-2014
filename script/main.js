@@ -19,6 +19,34 @@ var MainClass = new Class({
             //modalColor: 'white'
         });*/
 	},
+	
+	timestamp: function (date) {
+		/*
+		Internet Timestamp Generator
+		Copyright (c) 2009 Sebastiaan Deckers
+		License: GNU General Public License version 3 or later
+		Alterations: Euan Reid, 2014
+		*/
+		date = date ? date : new Date();
+		var offset = date.getTimezoneOffset();
+		pad = function (amount, width ){
+			var padding = "";
+			while (padding.length < width - 1 && amount < Math.pow(10, width - padding.length - 1))
+			padding += "0";
+			return padding + amount.toString();
+		}
+		return this.pad(date.getFullYear(), 4)
+			+ "-" + this.pad(date.getMonth() + 1, 2)
+			+ "-" + this.pad(date.getDate(), 2)
+			+ "T" + this.pad(date.getHours(), 2)
+			+ ":" + this.pad(date.getMinutes(), 2)
+			+ ":" + this.pad(date.getSeconds(), 2)
+			+ "." + this.pad(date.getMilliseconds(), 3)
+			+ (offset > 0 ? "-" : "+")
+			+ this.pad(Math.floor(Math.abs(offset) / 60), 2)
+			+ ":" + this.pad(Math.abs(offset) % 60, 2);
+		}
+	}
 
 	showCalendar: function(div){
 		var calendar = $(div).fullCalendar({
@@ -86,6 +114,38 @@ var MainClass = new Class({
 			'strokecolor': 'rgba(0,0,0,0)',
 			'fillcolor': 'rgba(0,0,230,0.6)',
 			'data': [4, 9, 8, 1]
+		});
+	},
+	
+	calendarSetup: function() {
+		gapi.client.load('calendar', 'v3', function() {
+			var request = gapi.client.calendar.calendars.insert({
+				"kind": "calendar#calendar",
+				"summary": "Sleep"
+			});
+			request.execute(function(calId) {
+				gapi.client.load('calendar', 'v3', function () {
+					var start = new Date();
+					start.setHours(23);
+					var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
+					var req = gapi.client.calendar.events.insert({
+						"kind": "calendar#event",
+						"calendarId": calId,
+						"summary": "Sleep",
+						"location": "Bed",
+						"start": {
+							"dateTime": this.timestamp(start)
+						},
+						"end": {
+							"dateTime": this.timestamp(end)
+						},
+						"recurrence": ["RRULE:FREQ=DAILY"]
+					});
+					req.execute(function(resp) {
+						console.log(resp);
+					});
+				});
+			});
 		});
 	}
 
