@@ -71,38 +71,14 @@ var MainClass = new Class({
 
 						importData.push(eventData);
 					}
-
-					Main.showCalendar('#calendar', importData);
 					} else {
 						console.log("Failed to retrieve events from " + calendarIds[key]);
 						console.log(resp.error);
 					}
 				});
 			}
-			var request = gapi.client.calendar.events.list({'calendarId': 'primary'});
-			request.execute(function(resp) {
-				if (resp.items) {
-					for (var i = 0; i < resp.items.length; i++) {
-						var eventData = {
-							title: resp.items[i].summary,
-							start: (resp.items[i] && resp.items[i].start && resp.items[i].start.dateTime) ? (resp.items[i].start.dateTime) : (new Date()),
-							end: (resp.items[i] && resp.items[i].end && resp.items[i].end.dateTime) ? (resp.items[i].end.dateTime) : (new Date()),
-							location: (resp.items[i].location!=null) ? resp.items[i].location : null,
-							backgroundColor: '#fff',
-							textColor: '#333',
-							allDay: false,
-							editable: false,
-							timeFormat: 'h(:mm)'
-						};
 
-						importData.push(eventData);
-					}
-
-					this.showCalendar('#calendar', importData);
-				}
-
-
-			}.bind(this));
+			Main.showCalendar('#calendar', importData);
 		}.bind(this));
 	},
 
