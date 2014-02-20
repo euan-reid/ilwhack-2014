@@ -1,3 +1,30 @@
+var timestamp = function (date) {
+	/*
+	Internet Timestamp Generator
+	Copyright (c) 2009 Sebastiaan Deckers
+	License: GNU General Public License version 3 or later
+	Alterations: Euan Reid, 2014
+	*/
+	date = date ? date : new Date();
+	var offset = date.getTimezoneOffset();
+	this.pad = function (amount, width ){
+		var padding = "";
+		while (padding.length < width - 1 && amount < Math.pow(10, width - padding.length - 1))
+		padding += "0";
+		return padding + amount.toString();
+	}
+	return this.pad(date.getFullYear(), 4)
+		+ "-" + this.pad(date.getMonth() + 1, 2)
+		+ "-" + this.pad(date.getDate(), 2)
+		+ "T" + this.pad(date.getHours(), 2)
+		+ ":" + this.pad(date.getMinutes(), 2)
+		+ ":" + this.pad(date.getSeconds(), 2)
+		+ "." + this.pad(date.getMilliseconds(), 3)
+		+ (offset > 0 ? "-" : "+")
+		+ this.pad(Math.floor(Math.abs(offset) / 60), 2)
+		+ ":" + this.pad(Math.abs(offset) % 60, 2);
+}
+
 var MainClass = new Class({
 	
 	initialize: function(){
@@ -10,39 +37,23 @@ var MainClass = new Class({
 
 		this.drawSpiderGraph('#spidergraph');
 
+		/*$(function() {
+			$( "#dialog" ).dialog();
+		});*/
 
-		/*$('#popupBox').bPopup({
+			/*$('#popupBox').bPopup({
             fadeSpeed: 'slow',
             followSpeed: 1500,
             //modal: false
         });*/
 	},
-	
-	timestamp: function (date) {
-		/*
-		Internet Timestamp Generator
-		Copyright (c) 2009 Sebastiaan Deckers
-		License: GNU General Public License version 3 or later
-		Alterations: Euan Reid, 2014
-		*/
-		date = date ? date : new Date();
-		var offset = date.getTimezoneOffset();
-		this.pad = function (amount, width ){
-			var padding = "";
-			while (padding.length < width - 1 && amount < Math.pow(10, width - padding.length - 1))
-			padding += "0";
-			return padding + amount.toString();
-		}
-		return this.pad(date.getFullYear(), 4)
-			+ "-" + this.pad(date.getMonth() + 1, 2)
-			+ "-" + this.pad(date.getDate(), 2)
-			+ "T" + this.pad(date.getHours(), 2)
-			+ ":" + this.pad(date.getMinutes(), 2)
-			+ ":" + this.pad(date.getSeconds(), 2)
-			+ "." + this.pad(date.getMilliseconds(), 3)
-			+ (offset > 0 ? "-" : "+")
-			+ this.pad(Math.floor(Math.abs(offset) / 60), 2)
-			+ ":" + this.pad(Math.abs(offset) % 60, 2);
+
+	showPopUp: function(){
+		$( "#popUpDialog" ).html("<input type='button' value='yes'>");
+
+		$(function() {
+			$( "#popUpDialog" ).dialog();
+		});
 	},
 
 	makeEventReal: function(event){
@@ -110,9 +121,9 @@ var MainClass = new Class({
 				console.log(event);
 
 		        if(event.suggestion == true){
-		        	this.makeEventReal(event);
+		        	this.showPopUp();
 
-		        	$('#calendar').fullCalendar('updateEvent', event);
+		        	//$('#calendar').fullCalendar('updateEvent', event);
 		        }
 
 		    }.bind(this),
@@ -120,56 +131,64 @@ var MainClass = new Class({
 		});
 	},
 	
-	drawSpiderGraph: function(div){
-		$(div).spidergraph({
+	drawSpiderGraph: function(diva){
+		$(diva).spidergraph({
 			'fields': ['live','work','play','rest'],
 			'gridcolor': 'rgba(20,20,20,0)'
 		});
-		$(div).spidergraph('addlayer', { 
+		/*$(diva).spidergraph('addlayer', { 
 			'strokecolor': 'rgba(230,230,230,0.8)',
 			'fillcolor': 'rgba(0,0,0,0)',
 			'data': [9, 14, 19, 13]
 		});
-		$(div).spidergraph('addlayer', { 
+		$(diva).spidergraph('addlayer', { 
 			'strokecolor': 'rgba(0,0,0,0)',
 			'fillcolor': 'rgba(0,0,230,0.6)',
 			'data': [4, 9, 8, 1]
-		});
+
+		});*/
+
 	},
 	
 	calendarSetup: function(authResult) {
 		if (authResult && !authResult.error) {
-			var that = this;
 			gapi.client.load('calendar', 'v3', function() {
 				var request = gapi.client.calendar.calendars.insert({
 					"kind": "calendar#calendar",
 					"summary": "Sleep"
 				});
-				request.execute(function(calId) {
-					gapi.client.load('calendar', 'v3', function () {
-						var start = new Date();
-						start.setHours(23);
-						var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
-						var req = gapi.client.calendar.events.insert({
-							"kind": "calendar#event",
-							"calendarId": calId,
-							"summary": "Sleep",
-							"location": "Bed",
-							"start": {
-								"dateTime": that.timestamp(start)
-							},
-							"end": {
-								"dateTime": that.timestamp(end)
-							},
-							"recurrence": ["RRULE:FREQ=DAILY"]
+				request.execute(function(cal) {
+					if (cal && !cal.error) {
+						gapi.client.load('calendar', 'v3', function () {
+							var start = new Date();
+							start.setHours(23);
+							var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
+							var req = gapi.client.calendar.events.insert({
+								"kind": "calendar#event",
+								"calendarId": cal.id,
+								"summary": "Sleep",
+								"location": "Bed",
+								"start": {
+									"dateTime": timestamp(start)
+								},
+								"end": {
+									"dateTime": timestamp(end)
+								},
+								"recurrence": ["RRULE:FREQ=DAILY"]
+							});
+							req.execute(function(resp) {
+								console.log("event creation response");
+								console.log(resp);
+							});
 						});
-						req.execute(function(resp) {
-							console.log(resp);
-						});
-					});
+					} else {
+						console.log("calendar not created");
+						console.log(cal);
+					}
 				});
 			});
 		} else {
+			console.log("authorisation error");
 			console.log(authResult);
 		}
 	}
@@ -181,5 +200,7 @@ var Main = new MainClass();
 
 $(document).ready(function() {
 	Main.ready();
+
+  	
 
 }).bind(this);
