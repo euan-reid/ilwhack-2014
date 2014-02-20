@@ -245,22 +245,16 @@ var MainClass = new Class({
 			editable: true,
 			dropable: true,
 			
-			eventSources:
-				[
-					/*{url: '/php/userData.php'}*/
-					{events: importData}
-				],
+			events: importData,/*{url: '/php/userData.php'}*/
 
 			eventClick: function(event, element) {
 				console.log(event);
 
-		        if(event.suggestion == true){
-		        	this.showPopUp(event);
-
-		        	//$('#calendar').fullCalendar('updateEvent', event);
-		        }
-
-		    }.bind(this),
+				if(event.suggestion == true){
+					this.showPopUp(event);
+					//$('#calendar').fullCalendar('updateEvent', event);
+				}
+			}.bind(this),
 
 		});
 		
