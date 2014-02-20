@@ -8,6 +8,7 @@
 		<!--CSS-->
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
 		<link rel="stylesheet" type="text/css" href="/css/fullcalendar.css">
+		<link rel="stylesheet" type="text/css" href="/css/jquery.rating.css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
   
@@ -33,6 +34,8 @@
 		<script src="/script/suggestor.js"></script>
 		<script src="/script/structures.js"></script>
 
+		<script src="/script/other/raty.js"></script>
+
 	</head>
 	<body>
 		<div id='header'>
@@ -50,6 +53,7 @@
 
 
 		<div id='popUpDialog' title="Event information"></div>
-		
+
+
 	</body>
 </html>

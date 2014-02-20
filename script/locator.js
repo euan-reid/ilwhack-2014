@@ -118,7 +118,18 @@ var Locator = new Class({
 		var suggestedPlace = this.findBestPlaceByRating(data[2]);
 		console.log(suggestedPlace);
 		var location = new Vec2(suggestedPlace.geometry.location.d, suggestedPlace.geometry.location.e);
-		this.main.giveSuggestion(previousData[0].getTime(), previousData[1].getTime(), suggestedPlace.name, location, suggestedPlace.reference);
+		var photoUrl = suggestedPlace.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 200});
+		var eventData = {
+			from: previousData[0].getTime(),
+			to: previousData[1].getTime(),
+			title: suggestedPlace.name,
+			location: location,
+			reference: suggestedPlace.reference,
+			photoUrl: photoUrl,
+			rating: suggestedPlace.rating
+		};
+
+		this.main.giveSuggestion(eventData);
 	},
 
 	findBestPlaceByRating: function(places){
