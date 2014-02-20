@@ -36,11 +36,16 @@ function handleAuthClick(event) {
 }
 
 function makeApiCall() {
-  gapi.client.load('calendar', 'v3', function() {
-    var request = gapi.client.calendar.calendarList.list();
-    // request.execute(function(resp) {var heading = document.createElement('h4'); heading.appendChild(document.createTextNode(resp.kind)); document.getElementById('output').appendChild(heading);});
-	request.execute(function(response){
-		console.log(response);
-	})
-  });
-}
+	gapi.client.load('calendar', 'v3', function() {
+		var request = gapi.client.calendar.events.list({'calendarId': 'primary'});
+		request.execute(function(resp) {
+			for (var i = 0; i < resp.items.length; i++) {
+				var li = document.createElement('li');
+				li.appendChild(document.createTextNode(resp.items[i].summary));
+				document.getElementById('output').appendChild(li);
+			}
+			Main.renderCalendar('#calendar', resp.items);
+		});
+	});
+};
+
