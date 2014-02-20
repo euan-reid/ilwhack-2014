@@ -263,6 +263,8 @@ var MainClass = new Class({
 		    }.bind(this),
 
 		});
+		
+		$(div).fullCalendar('render');
 	},
 	
 	drawSpiderGraph: function(diva){
