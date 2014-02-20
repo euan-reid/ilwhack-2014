@@ -29,19 +29,21 @@ var Suggestor = new Class({
 		return events;
 	},
 
-	giveSuggestion: function(from, to, title, location, reference){
+	giveSuggestion: function(eventData){
 		var source = [
 				{
-					title: title,
-					start: from,
-					end: to,
+					title: eventData.title,
+					start: eventData.from,
+					end: eventData.to,
 					allDay: false,
 					editable: false,
 					color: '#fff',
 					backgroundColor: '#009fe3',
 					timeFormat: '',
-					location: location,
-					reference: reference,
+					location: eventData.location,
+					reference: eventData.reference,
+					photoUrl: eventData.photoUrl,
+					rating: eventData.rating,
 					suggestion: true
 				}
 		];

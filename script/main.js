@@ -49,11 +49,49 @@ var MainClass = new Class({
 	},
 
 	showPopUp: function(event){
-		$( "#popUpDialog" ).html("<div id='map-canvas' class='gmap_canvas'></div>");
+		var htmlText = "\
+		<table><tr>\
+		<td><div id='map-canvas' class='gmap_canvas'></div>\
+		<td><img src='" + event.photoUrl + "' class='eventInfoImg'>\
+		<div class='eventInfoText'>\
+		" + event.title + "\
+		<div id='stars'></div>\
+		<tr><td>\
+		<center>\
+		<div class='eventInfoButtons'>\
+		<input type='button' id='eventInfoButtons_yes' value='yes'>\
+		<input type='button' id='eventInfoButtons_no' value='no'>\
+		<input type='button' id='eventInfoButtons_never' value='never'>\
+		</div></center>\
+		</table>\
+		";
+		$( "#popUpDialog" ).html(htmlText);
+
+		console.log(event.rating);
+
+		$('#stars').raty({
+    		showHalf:  true,
+    		readOnly:  true,
+			score:     	event.rating,
+			number: 	5
+		});
+
+		$('#eventInfoButtons_yes').click(function(){
+			this.makeEventReal(event);
+			$( "#popUpDialog" ).dialog( "close" );
+		}.bind(this));
+
+		$('#eventInfoButtons_no').click(function(){
+			$( "#popUpDialog" ).dialog( "close" );
+		});
+
+		$('#eventInfoButtons_never').click(function(){
+			$( "#popUpDialog" ).dialog( "close" );
+		});
 		
 
 		$(function() {
-			$( "#popUpDialog" ).dialog({ minWidth: 600 });
+			$( "#popUpDialog" ).dialog({ minWidth: 650 });
 		});
 
 		this.showMapWithLocation(event.location, event.reference);
