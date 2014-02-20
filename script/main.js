@@ -43,7 +43,6 @@ var MainClass = new Class({
 			+ (offset > 0 ? "-" : "+")
 			+ this.pad(Math.floor(Math.abs(offset) / 60), 2)
 			+ ":" + this.pad(Math.abs(offset) % 60, 2);
-		}
 	},
 
 	makeEventReal: function(event){
