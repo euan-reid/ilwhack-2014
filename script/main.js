@@ -28,24 +28,65 @@ var timestamp = function (date) {
 var MainClass = new Class({
 	
 	initialize: function(){
+		this.clientId = '400024507226-jgpklj9ofen2avmfjnk0aekpsvncr54h.apps.googleusercontent.com';
+		this.apiKey = 'AIzaSyB33EV0puEFY73thEKJFch-04qI8-85Fvg';
+		this.scopes = 'https://www.googleapis.com/auth/calendar';
+
 	},
 
 	ready: function(){
-		this.showCalendar('#calendar');
+		//this.showCalendar('#calendar');
 
 		this.suggestor = new Suggestor(this);
 
 		this.drawSpiderGraph('#spidergraph');
 
-		/*$(function() {
-			$( "#dialog" ).dialog();
-		});*/
+	},
 
-			/*$('#popupBox').bPopup({
-            fadeSpeed: 'slow',
-            followSpeed: 1500,
-            //modal: false
-        });*/
+	fetchRemoteCalendarEvents: function(){
+		var importData = new Array();
+		var locator = new Locator();
+
+		gapi.client.load('calendar', 'v3', function() {
+			var request = gapi.client.calendar.events.list({'calendarId': 'primary'});
+			request.execute(function(resp) {
+				if (resp.items) {
+					for (var i = 0; i < resp.items.length; i++) {
+						var calendarItem = resp.items[i]; 
+						var summary = calendarItem.summary;
+						var startTime = calendarItem.start.dateTime ? calendarItem.start.dateTime : new Date();
+						var endTime = !calendarItem.endTimeUnspecified ? calendarItem.end.dateTime : new Date();
+						addEvent(summary, startTime, endTime);
+						var li = document.createElement('li');
+						li.appendChild(document.createTextNode(resp.items[i].summary));
+						li.appendChild(document.createTextNode(resp.items[i].location));
+						li.appendChild(document.createTextNode(resp.items[i].description));
+						li.appendChild(document.createTextNode(resp.items[i].end.dateTime));
+						li.appendChild(document.createTextNode(resp.items[i].start.dateTime));
+
+
+
+						var eventData = {
+							title: resp.items[i].summary,
+							start: resp.items[i].start.dateTime,
+							end: resp.items[i].end.dateTime,
+							location: (resp.items[i].location!=null) ? resp.items[i].location : null,
+							backgroundColor: '#fff',
+							textColor: '#333',
+							allDay: false,
+							editable: false,
+							timeFormat: 'h(:mm)'
+						};
+
+						importData.push(eventData);
+					}
+
+					this.showCalendar('#calendar', importData);
+				}
+
+
+			}.bind(this));
+		}.bind(this));
 	},
 
 	showPopUp: function(event){
@@ -158,7 +199,8 @@ var MainClass = new Class({
 
 	},
 
-	showCalendar: function(div){
+	showCalendar: function(div, importData){
+		console.log('CALENDAR!');
 		var calendar = $(div).fullCalendar({
 			header: {
 				left: 'prev,next today',
@@ -197,7 +239,8 @@ var MainClass = new Class({
 			
 			eventSources:
 				[
-					{url: '/php/userData.php'}
+					/*{url: '/php/userData.php'}*/
+					{events: importData}
 				],
 
 			eventClick: function(event, element) {

@@ -12,6 +12,17 @@ var Locator = new Class({
 
 	},
 
+	findProperLocationByName: function(locationName){
+		console.log(locationName);
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode( { 'address': locationName}, function(results, status) {
+		  if (status == google.maps.GeocoderStatus.OK)
+		  {
+		  		return new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
+		  }
+		});
+	},
+
 	showNearbyPlaces: function(startPos, radius){
 		that = this;
 		this.startLatLng = new google.maps.LatLng(startPos.getX(), startPos.getY());
