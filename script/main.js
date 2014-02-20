@@ -144,15 +144,15 @@ var MainClass = new Class({
 					"kind": "calendar#calendar",
 					"summary": "Sleep"
 				});
-				request.execute(function(calId) {
-					if (calId) {
+				request.execute(function(cal) {
+					if (cal) {
 						gapi.client.load('calendar', 'v3', function () {
 							var start = new Date();
 							start.setHours(23);
 							var end = new Date(start.getTime() + (8 * 60 * 60 * 1000));
 							var req = gapi.client.calendar.events.insert({
 								"kind": "calendar#event",
-								"calendarId": calId,
+								"calendarId": cal.id,
 								"summary": "Sleep",
 								"location": "Bed",
 								"start": {
@@ -170,7 +170,7 @@ var MainClass = new Class({
 						});
 					} else {
 						console.log("calendar not created");
-						console.log(calId);
+						console.log(cal);
 					}
 				});
 			});
