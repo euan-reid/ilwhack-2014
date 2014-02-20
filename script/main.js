@@ -55,7 +55,7 @@ var MainClass = new Class({
 					continue;
 				var request = gapi.client.calendar.events.list({'calendarId': calendarIds[key]})
 				request.execute(function(resp) {
-					if (resp && !resp.error) {
+					if (resp && !resp.error && resp.items) {
 						for (var i = 0; i < resp.items.length; i++) {
 						var eventData = {
 							title: resp.items[i].summary,
