@@ -46,72 +46,43 @@ var MainClass = new Class({
 	},
 
 	fetchRemoteCalendarEvents: function(){
-		var importData = new Array();
-		var locator = new Locator();
-
 		gapi.client.load('calendar', 'v3', function() {
-<<<<<<< HEAD
-			var request = gapi.client.calendar.events.list({
-				'calendarId': 'primary',
-				'timeMin': '2014-02-15T12:00:00-00:00'
-			});
-=======
+			var importData = new Array();
+			var locator = new Locator();
+			
 			for (key in calendarIds) {
 				if (typeof calendarIds[key] != "string")
 					continue;
-				var request = gapi.client.calendar.events.list({'calendarId': calendarIds[key]})
+				var request = gapi.client.calendar.events.list({
+					'calendarId': calendarIds[key],
+					'timeMin': '2014-02-15T12:00:00-00:00'
+				})
 				request.execute(function(resp) {
 					if (resp && !resp.error && resp.items) {
 						for (var i = 0; i < resp.items.length; i++) {
-						var eventData = {
-							title: resp.items[i].summary,
-							start: resp.items[i].start.dateTime,
-							end: resp.items[i].end.dateTime,
-							location: (resp.items[i].location!=null) ? resp.items[i].location : null,
-							backgroundColor: '#fff',
-							textColor: '#333',
-							allDay: false,
-							editable: false,
-							timeFormat: 'h(:mm)'
-						};
+							var eventData = {
+								title: resp.items[i].summary,
+								start: resp.items[i].start.dateTime,
+								end: resp.items[i].end.dateTime,
+								location: (resp.items[i].location!=null) ? resp.items[i].location : null,
+								backgroundColor: '#fff',
+								textColor: '#333',
+								allDay: false,
+								editable: false,
+								timeFormat: 'h(:mm)'
+							};
 
-						importData.push(eventData);
-					}
-
-					Main.showCalendar('#calendar', importData);
+							importData.push(eventData);
+						}
 					} else {
 						console.log("Failed to retrieve events from " + calendarIds[key]);
 						console.log(resp.error);
 					}
 				});
 			}
-			var request = gapi.client.calendar.events.list({'calendarId': 'primary'});
->>>>>>> 1bad408032f270b6c781914bb9b5fc4b8e7a946f
-			request.execute(function(resp) {
-				if (resp.items) {
-					for (var i = 0; i < resp.items.length; i++) {
-						console.log(resp.items[i]);
-						var eventData = {
-							title: resp.items[i].summary,
-							start: (resp.items[i] && resp.items[i].start && resp.items[i].start.dateTime) ? (resp.items[i].start.dateTime) : (new Date()),
-							end: (resp.items[i] && resp.items[i].end && resp.items[i].end.dateTime) ? (resp.items[i].end.dateTime) : (new Date()),
-							location: (resp.items[i].location!=null) ? resp.items[i].location : null,
-							backgroundColor: '#fff',
-							textColor: '#333',
-							allDay: false,
-							editable: false,
-							timeFormat: 'h(:mm)'
-						};
 
-						importData.push(eventData);
-					}
-
-					this.showCalendar('#calendar', importData);
-				}
-
-
-			}.bind(this));
-		}.bind(this));
+			Main.showCalendar('#calendar', importData);
+		});
 	},
 
 	showPopUp: function(event){
