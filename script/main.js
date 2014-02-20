@@ -46,10 +46,10 @@ var MainClass = new Class({
 	},
 
 	fetchRemoteCalendarEvents: function(){
-		var importData = new Array();
-		var locator = new Locator();
-
 		gapi.client.load('calendar', 'v3', function() {
+			var importData = new Array();
+			var locator = new Locator();
+			
 			for (key in calendarIds) {
 				if (typeof calendarIds[key] != "string")
 					continue;
@@ -57,20 +57,20 @@ var MainClass = new Class({
 				request.execute(function(resp) {
 					if (resp && !resp.error && resp.items) {
 						for (var i = 0; i < resp.items.length; i++) {
-						var eventData = {
-							title: resp.items[i].summary,
-							start: resp.items[i].start.dateTime,
-							end: resp.items[i].end.dateTime,
-							location: (resp.items[i].location!=null) ? resp.items[i].location : null,
-							backgroundColor: '#fff',
-							textColor: '#333',
-							allDay: false,
-							editable: false,
-							timeFormat: 'h(:mm)'
-						};
+							var eventData = {
+								title: resp.items[i].summary,
+								start: resp.items[i].start.dateTime,
+								end: resp.items[i].end.dateTime,
+								location: (resp.items[i].location!=null) ? resp.items[i].location : null,
+								backgroundColor: '#fff',
+								textColor: '#333',
+								allDay: false,
+								editable: false,
+								timeFormat: 'h(:mm)'
+							};
 
-						importData.push(eventData);
-					}
+							importData.push(eventData);
+						}
 					} else {
 						console.log("Failed to retrieve events from " + calendarIds[key]);
 						console.log(resp.error);
@@ -79,7 +79,7 @@ var MainClass = new Class({
 			}
 
 			Main.showCalendar('#calendar', importData);
-		}.bind(this));
+		});
 	},
 
 	showPopUp: function(event){
