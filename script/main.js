@@ -75,56 +75,6 @@ var MainClass = new Class({
 
 		});
 	},
-	
-	drawSpiderGraph: function(div){
-		$(div).spidergraph({
-			'fields': ['live','work','play','rest'],
-			'gridcolor': 'rgba(20,20,20,1)'
-		});
-		$(div).spidergraph('addlayer', { 
-			'strokecolor': 'rgba(230,204,0,0.8)',
-			'fillcolor': 'rgba(230,204,0,0.6)',
-			'data': [5, 4, 9, 8]
-		});
-		$(div).spidergraph('addlayer', { 
-			'strokecolor': 'rgba(230,204,230,0.8)',
-			'fillcolor': 'rgba(230,204,230,0.6)',
-			'data': [4, 9, 8, 1]
-		});
-	}
-
-	renderCalendar: function(div, eventList){
-		var calendar = $(div).fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
-			},
-			titleFormat: {
-				month: 'MMMM yyyy',
-				week: "d [ MMM]{ '&#8212;' [ d MMM]} yyyy",
-				day: 'dddd, MMM d, yyyy'
-			},
-			firstDay: 1,
-			aspectRatio: 1.6,
-			defaultView: 'agendaWeek',
-			editable: true,
-			dropable: true,
-			
-			eventSources: 
-				[
-					eventList,
-				],
-
-			eventClick: function(event, element) {
-
-		    if(event.title == "lifecal")
-		        	$('#calendar').fullCalendar('updateEvent', event);
-
-		    },
-
-		});
-	},
 
 });
 
