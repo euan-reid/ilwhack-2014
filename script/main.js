@@ -285,6 +285,8 @@ var MainClass = new Class({
 	
 	calendarSetup: function(authResult) {
 		if (authResult && !authResult.error) {
+			var authorizeButton = document.getElementById('banner');
+			authorizeButton.onclick = null;
 			var addSleepEvent = function (cal) {
 				if (cal && !cal.error) {
 					var start = new Date();
