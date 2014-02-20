@@ -340,6 +340,17 @@ var MainClass = new Class({
 				}
 			}
 			Main.addGCalendar("Eat", addEatEvents);
+			var blankCalCallback = function (cal) {
+				if (cal && !cal.error)
+					console.log("calender created");
+				else
+					console.log("calendar not created");
+				console.log(cal);
+			}
+			Main.addGCalendar("Work", blankCalCallback);
+			Main.addGCalendar("Learning", blankCalCallback);
+			Main.addGCalendar("Exercise", blankCalCallback);
+			Main.addGCalendar("Social", blankCalCallback);
 		} else {
 			console.log("authorisation error");
 			console.log(authResult);
