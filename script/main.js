@@ -91,7 +91,7 @@ var MainClass = new Class({
 			'fillcolor': 'rgba(0,204,230,0.6)',
 			'data': [4, 9, 8, 1]
 		});
-	},
+	}
 
 });
 
