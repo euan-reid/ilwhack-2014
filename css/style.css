@@ -41,18 +41,33 @@ h1 {
 	margin: 0 auto;
 }
 
-#banner {
-	display: block;
-	margin: 5px auto 0 20px;
-	text-align: center;
-	width: 10%;
-}
-#banner > img {width: 100%;}
+/* Top of page */
+	/* Logo */
+	#banner {
+		display: block;
+		margin: 5px auto 0 20px;
+		text-align: center;
+		width: 10%;
+	}
+	#banner > img {width: 100%;}
 
-#spidergraph {
-	display: block;
-	margin: 5px 20px 0 auto;
-	width: 10%;
+	/* Spider graph */
+	#graphbox {
+		margin: 5px 20px 0 auto;
+		position: relative;
+		width: 10%;
+	}
+	#graphbox:before{
+		content: "";
+		display: block;
+		padding-top: 100%;
+	}
+	#spidergraph {
+		position:  absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
 	}
 
 .gmap_canvas {

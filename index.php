@@ -33,7 +33,7 @@
 				<img src="/imagery/LifeCal-logo.png" />
 			</div>
 			<!-- Using jQuery spidergraph  - https://github.com/jmstriegel/jquery.spidergraph/ -->
-			<div id="spidergraph"></div>
+			<div id="graphbox"><div id="spidergraph"></div></div>
 		</div>
 
 		<div id="calendar"></div>
