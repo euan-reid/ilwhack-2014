@@ -19,6 +19,10 @@
 			var command = <?php if(isset($_GET['com']) == 'test') echo "'test'"; else echo "null"; ?>;
 		</script>
 
+		<!-- For +1 button -->
+		<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
+		<!-- for bar.chart -->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
 
 		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
@@ -60,6 +64,10 @@
 		<div id='popUpDialog' title="Event information"></div>
 		<div id='popUpChart' title="Information"></div>
 
+		<!-- + button -->
+		<div class="g-plusone" data-size="tall" ></div>
 
+
+		
 	</body>
 </html>
