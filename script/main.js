@@ -81,9 +81,8 @@ var MainClass = new Class({
 		gapi.client.load('calendar', 'v3', function() {
 			var importData = new Array();
 			var locator = new Locator();
-			var deferred = $.Deferred();
 			
-			deferred.done(function () {Main.showCalendar('#calendar', importData)});
+			var loads = [];
 			
 			for (key in calendarIds) {
 				if (typeof calendarIds[key] != "string")
@@ -92,6 +91,7 @@ var MainClass = new Class({
 					'calendarId': calendarIds[key],
 					'timeMin': '2014-02-15T12:00:00-00:00'
 				})
+				var deferred = new $.Deferred();
 				function callbackMaker (key) {
 					function callback(resp) {
 						if (resp && !resp.error && resp.items) {
@@ -116,12 +116,13 @@ var MainClass = new Class({
 							console.log("Failed to retrieve events from " + key);
 							console.log(resp);
 						}
+						deferred.resolve(result); //result?
 					}
 					return callback;
 				}
-				deferred.then(function() {request.execute(callbackMaker(key));});
+				loads.push(deferred.promise());
 			}
-			$.when
+			$.when.apply(null, loads).then(function(){Main.showCalendar('#calendar', importData)});
 		});
 	},
 
