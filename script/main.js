@@ -42,8 +42,10 @@ var MainClass = new Class({
 
 		this.drawSpiderGraph('#spidergraph');
 
-		if(this.command = 'test')
-			this.showCalendar('#calendar');
+		if(this.command == 'test'){
+			var importData = { url: '/php/userData.php' };
+			this.showCalendar('#calendar', importData);
+		}
 
 	},
 
@@ -52,7 +54,7 @@ var MainClass = new Class({
 	},
 
 	fetchRemoteCalendarEvents: function(){
-		if(this.command = 'test')
+		if(this.command == 'test')
 			return;
 
 		gapi.client.load('calendar', 'v3', function() {
@@ -258,11 +260,8 @@ var MainClass = new Class({
 			editable: true,
 			dropable: true,
 			
-			//eventSources: (this.command = 'test') ? ['/php/userData.php'] : importData,
-			eventSources: 
-				[
-					{url: '/php/userData.php'}
-				],
+			//eventSources: (this.command == 'test') ? ['/php/userData.php'] : importData,
+			events: importData,
 			/*{url: '/php/userData.php'}*/
 
 			eventClick: function(event, element) {
