@@ -35,6 +35,19 @@ var MainClass = new Class({
 		this.scopes = 'https://www.googleapis.com/auth/calendar';
 
 		this.callendarLoaded = false;
+		
+		this.goalsInHours = {
+			live: 7,
+			work: 8,
+			play: 10,
+			rest: 4
+		};
+		this.hoursDone = {
+			live: 6,
+			work: 24,
+			play: 10,
+			rest: 1
+		};
 
 	},
 
@@ -49,7 +62,7 @@ var MainClass = new Class({
 			this.showCalendar('#calendar', importData);
 		}
 		
-		$('#spidergraph').mouseover( function(){ openChart(); } ).mouseout( function(){ closeChart(); } );
+		$('#spidergraph').mouseover( function(){ Main.openChart(); } ).mouseout( function(){ Main.closeChart(); } );
 
 	},
 
@@ -453,20 +466,46 @@ var MainClass = new Class({
 			console.log(authResult);
 		}
 
-	}
+	},
+	
+	closeChart: function(){
+		$(function() {
+			$( "#popUpChart" ).dialog("close");
+		});	
+	},
+	
+	openChart: function(){
+		$(function() {
+			Main.barGraphForPopup(Main.goalsInHours, Main.hoursDone );
+			$( "#popUpChart" ).dialog({ minWidth: 400 });
+		});	
+	},
+	
+	barGraphForPopup: function(goals, done){
+		//data for chart
+		var data = {
+		labels : ["Live","Work","Play","Rest"],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,1)",
+				data : [goals.live, goals.work, goals.play, goals.rest]
+			}
+			,
+			{
+				fillColor : "rgba(151,187,205,0.5)",
+				strokeColor : "rgba(151,187,205,1)",
+				data : [done.live, done.work, done.play, done.rest]
+			}
+		]
+		}
+ 		//Get the context of the canvas element we want to select
+		var ctx = document.getElementById("infoChart").getContext("2d");
+
+		var myNewChart = new Chart(ctx).Bar(data);
+	},
 
 });
-
-function closeChart(){
-	$(function() {
-		$( "#popUpChart" ).dialog("close");
-	});	
-}
-function openChart(){
-	$(function() {
-		$( "#popUpChart" ).dialog({ minWidth: 650 });
-	});	
-}
 
 var Main = new MainClass();
 
