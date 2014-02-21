@@ -55,6 +55,16 @@ var MainClass = new Class({
 
 	ready: function(command){
 		this.command = command;
+		
+		if(this.command == 'test'){
+			this.hoursDone = {
+				live: 6,
+				work: 24,
+				play: 10,
+				rest: 1
+			};
+			this.hoursDone.rest = 168 - this.live - this.work - this.play;
+		}
 		//this.showCalendar('#calendar');
 
 		this.drawSpiderGraph(Main.goalsInHours, Main.hoursDone);
@@ -63,13 +73,6 @@ var MainClass = new Class({
 			var importData = { url: '/php/userData.php' };
 			this.showCalendar('#calendar', importData);
 			
-			this.hoursDone = {
-				live: 6,
-				work: 24,
-				play: 10,
-				rest: 1
-			};
-			this.hoursDone.rest = 168 - this.live - this.work - this.play;
 		}
 		
 		
