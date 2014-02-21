@@ -81,10 +81,10 @@ var MainClass = new Class({
 			return '#9FE1E7';
 		else if (calName == "Exercise")
 			return '#16A765';
-		else if (calName == "Socialise")
+		else if (calName == "Social")
 			return '#F83A22';
 		else
-			return '#F9F9F9';
+			return '#F6F6F6';
 	},
 
 	fetchRemoteCalendarEvents: function(){
@@ -463,7 +463,7 @@ var MainClass = new Class({
 					Main.addEvent(cal, "Sleep", start, end, function(resp) {
 						console.log("Sleep event creation response");
 						console.log(resp);
-					}, "DAILY", "Bed");
+					}, "DAILY");
 				} else {
 					console.log("Sleep calendar not created");
 					console.log(cal);
