@@ -81,7 +81,7 @@ var MainClass = new Class({
 			return '#9FE1E7';
 		else if (calName == "Exercise")
 			return '#16A765';
-		else if (calName == "Socialise")
+		else if (calName == "Social")
 			return '#F83A22';
 		else
 			return '#F9F9F9';
