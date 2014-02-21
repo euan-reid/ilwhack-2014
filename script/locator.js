@@ -31,7 +31,7 @@ var Locator = new Class({
 			{
 					console.log(results[0].geometry.location);
 					window.cache[locationName] = new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
-					this.addResult(this.cache[locationName]);
+					this.addResult(window.cache[locationName]);
 					return;
 				
 			} else {
