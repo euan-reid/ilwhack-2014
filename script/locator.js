@@ -14,13 +14,22 @@ var Locator = new Class({
 
 	findProperLocationByName: function(locationName){
 		console.log(locationName);
+		if(!locationName || locationName == ""){
+			this.addResult(null);
+			return;
+		}
+
+
 		var geocoder = new google.maps.Geocoder();
 		geocoder.geocode( { 'address': locationName}, function(results, status) {
 		  if (status == google.maps.GeocoderStatus.OK)
 		  {
 		  		console.log(results[0].geometry.location);
 		  		this.addResult(new Vec2(results[0].geometry.location.d, results[0].geometry.location.e));
+		  		return;
 		  		//return new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
+		  } else {
+		  		console.log('Error in finding the location by name...');
 		  }
 		}.bind(this));
 	},

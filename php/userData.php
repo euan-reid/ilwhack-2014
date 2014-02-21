@@ -26,6 +26,34 @@ $events = array();
     $eventsArray['location'] =  "Pleasance, Edinburgh, United Kingdom";
     $events[] = $eventsArray;
 
+    $eventsArray = array();
+    $eventsArray['title'] = "Brunch - Taviot";
+    $eventsArray['start'] = "2014-02-21 10:00:00";
+    $eventsArray['end'] = "2014-02-21 11:00:00";
+    $eventsArray['location'] =  "Teviot Place, Edinburgh, United Kingdom";
+    $events[] = $eventsArray;
+
+    $eventsArray = array();
+    $eventsArray['title'] = "National Gallery of Scotland";
+    $eventsArray['start'] = "2014-02-21 12:00:00";
+    $eventsArray['end'] = "2014-02-21 13:30:00";
+    $eventsArray['location'] =  "National Gallery of Scotland, Edinburgh, United Kingdom";
+    $events[] = $eventsArray;
+
+    $eventsArray = array();
+    $eventsArray['title'] = "Gym - pleasance";
+    $eventsArray['start'] = "2014-02-21 17:00:00";
+    $eventsArray['end'] = "2014-02-21 20:00:00";
+    $eventsArray['location'] =  "Pleasance, Edinburgh, United Kingdom";
+    $events[] = $eventsArray;
+
+    $eventsArray = array();
+    $eventsArray['title'] = "Studying";
+    $eventsArray['start'] = "2014-02-23 15:00:00";
+    $eventsArray['end'] = "2014-02-23 20:00:00";
+    $eventsArray['location'] =  "Pollock Halls of Residence, Holyrood Park Road, Edinburgh, United Kingdom";
+    $events[] = $eventsArray;
+
     foreach($events as &$event){
 	    $event['backgroundColor'] = '#fff';
 	    $event['textColor'] = '#333';

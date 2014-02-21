@@ -15,14 +15,13 @@ var Suggestor = new Class({
 			var from = new Date(y, m, d, 13, 30);
 			var to = new Date(y, m, d, 15, 00);
 			this.giveSuggestion(from, to , 'LC');*/
-		}.bind(this), 7000);
+		}.bind(this), 5000);
 	},
 
 	findSuggestions: function(data){
 		var locator = new Locator(this);
 
 		if(!data[0].location.x){
-			console.log('tady');
 			var eventData = {
 						from: data[0].getTime(),
 						to: data[1].getTime(),
@@ -69,6 +68,9 @@ var Suggestor = new Class({
 
 	giveSugestionsBasedOnFreeTimes: function(){
 		var events = this.getCallendarEvents();
+		console.log('EVENTS:');
+		console.log(events);
+
 		events = this.findLonglatForNamesLocations(events);
 
 	},
@@ -93,14 +95,16 @@ var Suggestor = new Class({
 	},
 
 	fixLocations: function(events, longlatLocations){
-		console.log(events);
-		console.log(longlatLocations);
-
 		var arr = new Array();
+
+		console.log('FIX locations');
 
 		$.each(events, function( index, value ) {
 
-			value.location = new Array(longlatLocations[index].getX(), longlatLocations[index].getY());
+			if(longlatLocations[index] == null)
+				value.location = null;
+			else
+				value.location = new Array(longlatLocations[index].getX(), longlatLocations[index].getY());
 			arr.push(value);
 
 		}.bind(this));
@@ -111,6 +115,8 @@ var Suggestor = new Class({
 
 	giveSugestionsBasedOnFreeTimesWithLonglatLocations: function(events){
 		var lastEvent = null;
+
+		console.log('LOCATIONS:');
 		console.log(events);
 
 		$.each(events, function( index, value ) {
@@ -127,25 +133,20 @@ var Suggestor = new Class({
 	
 
 	findTypeOfSuggestion: function(firstEvent, secondEvent){
-		if(!firstEvent.location)
+		if(!firstEvent.location || !secondEvent.location)
 			return;
-
-		console.log(firstEvent.location);
 
 		var from = new Date(firstEvent.end);
 		var to = new Date(secondEvent.start);
 		var timeDifference = this.getTimeInMinutesFromMiliseconds(to-from);
 
-		console.log(timeDifference);
-
+		console.log('trying...' + timeDifference);
 		if(timeDifference > 0 && timeDifference <= 120){
 			console.log('YEAH');
 			var data = new Array(
 				new LocTime(new Vec2(firstEvent.location[0], firstEvent.location[1]), from),
 				new LocTime(new Vec2(secondEvent.location[0], secondEvent.location[1]), to)
 			);
-
-			console.log(data);
 
 			this.findSuggestions(data);
 		}

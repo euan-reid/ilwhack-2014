@@ -94,7 +94,10 @@ var MainClass = new Class({
 		gapi.client.load('calendar', 'v3', function() {
 			var importData = new Array();
 			var locator = new Locator();
-
+			var deferred = $.Deferred();
+			
+			deferred.done(function () {Main.showCalendar('#calendar', importData)});
+			
 			for (key in calendarIds) {
 				if (typeof calendarIds[key] != "string")
 					continue;
@@ -122,7 +125,6 @@ var MainClass = new Class({
 
 								importData.push(eventData);
 							}
-							Main.showCalendar('#calendar', importData);
 						} else {
 							console.log("Failed to retrieve events from " + key);
 							console.log(resp);
@@ -130,8 +132,9 @@ var MainClass = new Class({
 					}
 					return callback;
 				}
-				request.execute(callbackMaker(key));
+				deferred.then(function() {request.execute(callbackMaker(key));});
 			}
+			$.when
 		});
 	},
 
