@@ -1,9 +1,9 @@
+var cache = {};
+
 var Locator = new Class({
 	
 	initialize: function(main){
 		this.main = main;
-		
-		this.cache = {};
 
 		this.timesForPlaces = {
 			store: {
@@ -23,8 +23,8 @@ var Locator = new Class({
 		console.log('cache:');
 		console.log(this.cache);
 		
-		if (this.cache[locationName]) {
-			this.addResult(this.cache[locationName]);
+		if (cache[locationName]) {
+			this.addResult(cache[locationName]);
 			return;
 		}
 
@@ -33,7 +33,7 @@ var Locator = new Class({
 			if (status == google.maps.GeocoderStatus.OK)
 			{
 					console.log(results[0].geometry.location);
-					this.cache[locationName] = new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
+					cache[locationName] = new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
 					this.addResult(this.cache[locationName]);
 					return;
 				
