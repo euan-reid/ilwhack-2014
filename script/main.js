@@ -84,7 +84,7 @@ var MainClass = new Class({
 		else if (calName == "Social")
 			return '#F83A22';
 		else
-			return '#F9F9F9';
+			return '#F6F6F6';
 	},
 
 	fetchRemoteCalendarEvents: function(){
