@@ -66,30 +66,34 @@ var MainClass = new Class({
 					'calendarId': calendarIds[key],
 					'timeMin': '2014-02-15T12:00:00-00:00'
 				})
-				request.execute(function(key, resp) {
-					if (resp && !resp.error && resp.items) {
-						console.log(key);
-						console.log(resp.items);
-						for (var i = 0; i < resp.items.length; i++) {
-							var eventData = {
-								title: resp.items[i].summary,
-								start: resp.items[i].start.dateTime,
-								end: resp.items[i].end.dateTime,
-								location: (resp.items[i].location!=null) ? resp.items[i].location : null,
-								backgroundColor: '#fff',
-								textColor: '#333',
-								allDay: false,
-								editable: false,
-								timeFormat: 'h(:mm)'
-							};
+				function callbackMaker (key) {
+					function callback(resp) {
+						if (resp && !resp.error && resp.items) {
+							console.log(key);
+							console.log(resp.items);
+							for (var i = 0; i < resp.items.length; i++) {
+								var eventData = {
+									title: resp.items[i].summary,
+									start: resp.items[i].start.dateTime,
+									end: resp.items[i].end.dateTime,
+									location: (resp.items[i].location!=null) ? resp.items[i].location : null,
+									backgroundColor: '#fff',
+									textColor: '#333',
+									allDay: false,
+									editable: false,
+									timeFormat: 'h(:mm)'
+								};
 
-							importData.push(eventData);
+								importData.push(eventData);
+							}
+						} else {
+							console.log("Failed to retrieve events from " + key);
+							console.log(resp);
 						}
-					} else {
-						console.log("Failed to retrieve events from " + key);
-						console.log(resp);
 					}
-				}(key));
+					return callback;
+				}
+				request.execute(callbackMaker(key));
 			}
 
 			Main.showCalendar('#calendar', importData);
