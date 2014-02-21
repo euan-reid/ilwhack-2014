@@ -3,8 +3,6 @@ var Suggestor = new Class({
 		this.main = main;
 
 		setTimeout(function(){
-			//this.findSuggestions();
-			console.log('SUGGESTOR');
 			this.giveSugestionsBasedOnFreeTimes();
 
 
