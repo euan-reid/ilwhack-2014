@@ -78,7 +78,7 @@
 
 		<div class="g-plusone" data-size="tall" ></div>
 
-		<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>		
+		<div class="fb-like" data-href="https://www.facebook.com/f4ep" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>		
 
 	</body>
 </html>
