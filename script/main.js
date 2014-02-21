@@ -103,8 +103,8 @@ var MainClass = new Class({
 				var request = gapi.client.calendar.events.list({
 					'calendarId': calendarIds[key],
 					'singleEvents': true,
-					'timeMin': timestamp(new Date(+new Date - 12096e5);),
-					'timeMax': timestamp(new Date(+new Date + 12096e5);)
+					'timeMin': timestamp(new Date(+new Date - 12096e5)),
+					'timeMax': timestamp(new Date(+new Date + 12096e5))
 				})
 				var deferred = new $.Deferred();
 				function callbackMaker (key, deferred) {
