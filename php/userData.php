@@ -2,6 +2,14 @@
 
 $events = array();
 
+    $eventsArray = array();
+    $eventsArray['title'] = "Swimming pool";
+    $eventsArray['start'] = "2014-02-18 08:00:00";
+    $eventsArray['end'] = "2014-02-18 11:00:00";
+    //$eventsArray['location'] = array(55.953036,-3.191765);
+    $eventsArray['location'] =  "";
+    $events[] = $eventsArray;
+
 	$eventsArray = array();
 	$eventsArray['title'] = "Breakfast at Tiffany's";
     $eventsArray['start'] = "2014-02-20 08:00:00";

@@ -81,10 +81,10 @@ var MainClass = new Class({
 			return '#9FE1E7';
 		else if (calName == "Exercise")
 			return '#16A765';
-		else if (calName == "Socialise")
+		else if (calName == "Social")
 			return '#F83A22';
 		else
-			return '#F9F9F9';
+			return '#F6F6F6';
 	},
 
 	fetchRemoteCalendarEvents: function(){
@@ -102,7 +102,9 @@ var MainClass = new Class({
 					continue;
 				var request = gapi.client.calendar.events.list({
 					'calendarId': calendarIds[key],
-					'timeMin': '2014-02-15T12:00:00-00:00'
+					'singleEvents': true,
+					'timeMin': timestamp(new Date(+new Date - 12096e5)),
+					'timeMax': timestamp(new Date(+new Date + 12096e5))
 				})
 				var deferred = new $.Deferred();
 				function callbackMaker (key, deferred) {
@@ -157,6 +159,7 @@ var MainClass = new Class({
 		</div></center>\
 		</table>\
 		";
+
 		$( "#popUpDialog" ).html(htmlText);
 
 		console.log(event.rating);
@@ -185,9 +188,62 @@ var MainClass = new Class({
 		
 
 		$(function() {
-			$( "#popUpDialog" ).dialog({ minWidth: 650 });
+			$( "#popUpDialog" ).dialog({ minWidth: 650, maxHeight: 1000 });
 		});
 
+		this.showMapWithLocation(event.location, event.reference);
+	},
+
+	showPopUpNormalEvent: function(event){
+		if(!event.location){
+			this.showPopUpNormalEvent_withoutLocation(event);
+		} else {
+			this.showPopUpNormalEvent_withLocation(event);
+		}
+
+	},
+
+	showPopUpNormalEvent_withoutLocation: function(event){
+		var htmlText = "\
+		No additional data provided.<BR><BR>\
+		<input type='button' id='eventInfoButtons_back' value='Back'>\
+		";
+
+		$( "#popUpDialog" ).html(htmlText);
+
+		$('#eventInfoButtons_back').click(function(){
+			$( "#popUpDialog" ).dialog( "close" );
+		}.bind(this));
+
+		$(function() {
+			$( "#popUpDialog" ).dialog({ minWidth: 200, maxHeight: 100});
+		});
+	},
+
+	showPopUpNormalEvent_withLocation: function(event){
+		var htmlText = "\
+		<table><tr>\
+		<td><div id='map-canvas' class='gmap_canvas'></div>\
+		<tr><td>\
+		<center>\
+		<div class='eventInfoButtons'>\
+		<input type='button' id='eventInfoButtons_back' value='Back'>\
+		</div></center>\
+		</table>\
+		";
+
+		$( "#popUpDialog" ).html(htmlText);
+
+		$('#eventInfoButtons_back').click(function(){
+			$( "#popUpDialog" ).dialog( "close" );
+		}.bind(this));
+
+		$(function() {
+			$( "#popUpDialog" ).dialog({ minWidth: 430, maxHeight: 1000 });
+		});
+
+		event.reference = "";
+		console.log(event.location);
 		this.showMapWithLocation(event.location, event.reference);
 	},
 
@@ -315,6 +371,8 @@ var MainClass = new Class({
 				if(event.suggestion == true){
 					this.showPopUp(event);
 					//$('#calendar').fullCalendar('updateEvent', event);
+				} else {
+					this.showPopUpNormalEvent(event);
 				}
 			}.bind(this),
 
@@ -427,7 +485,7 @@ var MainClass = new Class({
 					Main.addEvent(cal, "Sleep", start, end, function(resp) {
 						console.log("Sleep event creation response");
 						console.log(resp);
-					}, "DAILY", "Bed");
+					}, "DAILY");
 				} else {
 					console.log("Sleep calendar not created");
 					console.log(cal);
