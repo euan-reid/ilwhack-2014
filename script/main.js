@@ -441,7 +441,7 @@ var MainClass = new Class({
 					Main.addEvent(cal, "Sleep", start, end, function(resp) {
 						console.log("Sleep event creation response");
 						console.log(resp);
-					}, "DAILY", "Bed");
+					}, "DAILY");
 				} else {
 					console.log("Sleep calendar not created");
 					console.log(cal);
