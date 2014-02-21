@@ -21,7 +21,7 @@ var Suggestor = new Class({
 	findSuggestions: function(data){
 		var locator = new Locator(this);
 
-		if(!data[0].location.x){
+		if(!data[0].location.getX()){
 			var eventData = {
 						from: data[0].getTime(),
 						to: data[1].getTime(),
@@ -104,7 +104,7 @@ var Suggestor = new Class({
 			if(longlatLocations[index] == null)
 				value.location = null;
 			else
-				value.location = new Array(longlatLocations[index].getX(), longlatLocations[index].getY());
+				value.location = new Vec2(longlatLocations[index].getX(), longlatLocations[index].getY());
 			arr.push(value);
 
 		}.bind(this));
@@ -144,8 +144,10 @@ var Suggestor = new Class({
 		if(timeDifference > 0 && timeDifference <= 120){
 			console.log('YEAH');
 			var data = new Array(
-				new LocTime(new Vec2(firstEvent.location[0], firstEvent.location[1]), from),
-				new LocTime(new Vec2(secondEvent.location[0], secondEvent.location[1]), to)
+				/*new LocTime(new Vec2(firstEvent.location[0], firstEvent.location[1]), from),
+				new LocTime(new Vec2(secondEvent.location[0], secondEvent.location[1]), to)*/
+				new LocTime(new Vec2(firstEvent.location.getX(), firstEvent.location.getY()), from),
+				new LocTime(new Vec2(secondEvent.location.getX(), secondEvent.location.getY()), to)
 			);
 
 			this.findSuggestions(data);
