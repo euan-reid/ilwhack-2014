@@ -2,6 +2,8 @@ var Locator = new Class({
 	
 	initialize: function(main){
 		this.main = main;
+		
+		this.cache = {};
 
 		this.timesForPlaces = {
 			store: {
@@ -19,37 +21,25 @@ var Locator = new Class({
 		}
 
 		console.log('cache:');
-		console.log(this.storedData.locCache);
-
-		if(this.storedData.locCache){
-			$.each(this.storedData.locCache, function( index, value ) {
-				if(locationName == value.name){
-					console.log(">> SKIPPED <<");
-					this.addResult(new Vec2( value.location.getX(), value.location.getY()));
-					return;
-				}
-
-			}.bind(this));
+		console.log(this.cache);
+		
+		if (this.cache[locationName]) {
+			this.addResult(this.cache[locationName]);
+			return;
 		}
-
-		console.log(locationName);
-
 
 		var geocoder = new google.maps.Geocoder();
 		geocoder.geocode( { 'address': locationName}, function(results, status) {
-		  if (status == google.maps.GeocoderStatus.OK)
-		  {
-		  		console.log(results[0].geometry.location);
-		  		this.addResult(new Vec2(results[0].geometry.location.d, results[0].geometry.location.e));
-		  		this.storedData.locCache.push({
-		  			name: locationName,
-		  			location: new Vec2(results[0].geometry.location.d, results[0].geometry.location.e)
-		  		});
-		  		return;
-		  		
-		  } else {
-		  		console.log('Error in finding the location by name...');
-		  }
+			if (status == google.maps.GeocoderStatus.OK)
+			{
+					console.log(results[0].geometry.location);
+					this.cache[locationName] = new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
+					this.addResult(this.cache[locationName]);
+					return;
+				
+			} else {
+					console.log('Error in finding the location by name...');
+			}
 		}.bind(this));
 	},
 
