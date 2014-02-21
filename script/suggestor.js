@@ -4,6 +4,7 @@ var Suggestor = new Class({
 
 		setTimeout(function(){
 			//this.findSuggestions();
+			console.log('SUGGESTOR');
 			this.giveSugestionsBasedOnFreeTimes();
 
 

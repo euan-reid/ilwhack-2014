@@ -247,7 +247,7 @@ var MainClass = new Class({
 		this.showMapWithLocation(event.location, event.reference);
 	},
 
-	showMapWithLocation: function(location, reference){
+	showMapWithLocation: function(location){
 		var targetLoc = new google.maps.LatLng(location.getX(), location.getY());
 		
 		map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -255,24 +255,11 @@ var MainClass = new Class({
 		zoom: 15
 		});
 
-		var request = {
-			reference: reference
-		};
-
-		var infowindow = new google.maps.InfoWindow();
-		service = new google.maps.places.PlacesService(map);
-		service.getDetails(request, function(place, status) {
-			if (status == google.maps.places.PlacesServiceStatus.OK) {
-				var marker = new google.maps.Marker({
-					map: map,
-					position: place.geometry.location
-				});
-				google.maps.event.addListener(marker, 'click', function() {
-					infowindow.setContent(place.name);
-					sinfowindow.open(map, this);
-				});
-			}
-		});
+		var marker = new google.maps.Marker({
+	      position: targetLoc,
+	      map: map,
+	      title: 'Location'
+	  	});
 
 	},
 
