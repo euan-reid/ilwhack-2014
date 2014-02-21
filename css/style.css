@@ -59,12 +59,12 @@ h1 {
 	#graphbox {
 		margin: 5px 20px 0 auto;
 		position: relative;
-		width: 300px;
+		width: 25%;
 	}
 	#graphbox:before{
 		content: "";
 		display: block;
-		padding-top: 100%;
+		padding-top: 50%;
 	}
 	#spidergraph {
 		position:  absolute;
