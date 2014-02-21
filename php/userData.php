@@ -27,7 +27,7 @@ $events = array();
     $events[] = $eventsArray;
 
     $eventsArray = array();
-    $eventsArray['title'] = "Gym - pleasance";
+    $eventsArray['title'] = "Gym - Pleasance";
     $eventsArray['start'] = "2014-02-20 15:00:00";
     $eventsArray['end'] = "2014-02-20 18:00:00";
     //$eventsArray['location'] = array(55.946764,-3.181315);
@@ -35,7 +35,7 @@ $events = array();
     $events[] = $eventsArray;
 
     $eventsArray = array();
-    $eventsArray['title'] = "Brunch - Taviot";
+    $eventsArray['title'] = "Brunch - Teviot";
     $eventsArray['start'] = "2014-02-21 10:00:00";
     $eventsArray['end'] = "2014-02-21 11:00:00";
     $eventsArray['location'] =  "Teviot Place, Edinburgh, United Kingdom";
@@ -49,7 +49,7 @@ $events = array();
     $events[] = $eventsArray;
 
     $eventsArray = array();
-    $eventsArray['title'] = "Gym - pleasance";
+    $eventsArray['title'] = "Gym - Pleasance";
     $eventsArray['start'] = "2014-02-21 17:00:00";
     $eventsArray['end'] = "2014-02-21 20:00:00";
     $eventsArray['location'] =  "Pleasance, Edinburgh, United Kingdom";
