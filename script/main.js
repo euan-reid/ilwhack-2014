@@ -55,7 +55,7 @@ var MainClass = new Class({
 		this.command = command;
 		//this.showCalendar('#calendar');
 
-		this.drawSpiderGraph('#spidergraph');
+		this.drawSpiderGraph(Main.goalsInHours, Main.hoursDone);
 
 		if(this.command == 'test'){
 			var importData = { url: '/php/userData.php' };
@@ -382,11 +382,33 @@ var MainClass = new Class({
 		this.calendarLoaded();
 	},
 	
-	drawSpiderGraph: function(diva){
-		$(diva).spidergraph({
-			'fields': ['live','work','play','rest'],
-			'gridcolor': 'rgba(20,20,20,0)'
-		});
+	drawSpiderGraph: function(goals, done){
+	
+		var data = {
+		labels : ["Live","Work","Play","Rest"],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,1)",
+				pointStrokeColor : "#fff",
+				data : [goals.live, goals.work, goals.play, goals.rest]
+			}
+			,
+			{
+				fillColor : "rgba(151,187,205,0.5)",
+				strokeColor : "rgba(151,187,205,1)",
+				pointStrokeColor : "#fff",
+				data : [done.live, done.work, done.play, done.rest]
+			}
+			]
+		};
+		var ctx = document.getElementById('spidergraph').getContext("2d");
+		new Chart( ctx ).Radar(data);
+		
+		// $(diva).spidergraph({
+			// 'fields': ['live','work','play','rest'],
+			// 'gridcolor': 'rgba(20,20,20,0)'
+		// });
 		/*$(diva).spidergraph('addlayer', { 
 			'strokecolor': 'rgba(230,230,230,0.8)',
 			'fillcolor': 'rgba(0,0,0,0)',

@@ -59,7 +59,7 @@ h1 {
 	#graphbox {
 		margin: 5px 20px 0 auto;
 		position: relative;
-		width: 10%;
+		width: 300px;
 	}
 	#graphbox:before{
 		content: "";
