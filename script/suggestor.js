@@ -19,6 +19,7 @@ var Suggestor = new Class({
 	},
 
 	findSuggestions: function(data){
+		var locator = new Locator(this);
 
 		if(!data[0].location.x){
 			console.log('tady');
@@ -68,9 +69,48 @@ var Suggestor = new Class({
 
 	giveSugestionsBasedOnFreeTimes: function(){
 		var events = this.getCallendarEvents();
-		var lastEvent = null;
+		events = this.findLonglatForNamesLocations(events);
 
-		events = this.fixLocations(events);
+	},
+
+	findLonglatForNamesLocations: function(events){
+		var locator = new Locator(this);
+		
+		var findLonglatForNamesLocationsCallback = function(pass){
+			console.log('HUJAH');
+			this.fixLocations(events, pass);
+		}.bind(this);
+
+		var action = new Solver(this, events, findLonglatForNamesLocationsCallback);
+
+		$.each(events, function( index, value ) {
+			action.addFunction(locator.findProperLocationByName, [value.location]);
+
+		}.bind(this));
+
+		action.run();
+
+	},
+
+	fixLocations: function(events, longlatLocations){
+		console.log(events);
+		console.log(longlatLocations);
+
+		var arr = new Array();
+
+		$.each(events, function( index, value ) {
+
+			value.location = new Array(longlatLocations[index].getX(), longlatLocations[index].getY());
+			arr.push(value);
+
+		}.bind(this));
+
+		this.giveSugestionsBasedOnFreeTimesWithLonglatLocations(arr);
+		
+	},
+
+	giveSugestionsBasedOnFreeTimesWithLonglatLocations: function(events){
+		var lastEvent = null;
 		console.log(events);
 
 		$.each(events, function( index, value ) {
@@ -82,28 +122,15 @@ var Suggestor = new Class({
 			lastEvent = value;
 
 		}.bind(this));
-
 	},
 
-	fixLocations: function(events){
-		var locator = new Locator(this);
-		var arr = new Array();
-
-		$.each(events, function( index, value ) {
-			console.log(value.location);
-
-			arr.push(value);
-			console.log(locator.findProperLocationByName(value.location));
-
-		}.bind(this));
-
-		return arr;
-
-	},
+	
 
 	findTypeOfSuggestion: function(firstEvent, secondEvent){
 		if(!firstEvent.location)
 			return;
+
+		console.log(firstEvent.location);
 
 		var from = new Date(firstEvent.end);
 		var to = new Date(secondEvent.start);

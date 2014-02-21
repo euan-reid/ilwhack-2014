@@ -19,9 +19,10 @@ var Locator = new Class({
 		  if (status == google.maps.GeocoderStatus.OK)
 		  {
 		  		console.log(results[0].geometry.location);
-		  		return new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
+		  		this.addResult(new Vec2(results[0].geometry.location.d, results[0].geometry.location.e));
+		  		//return new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
 		  }
-		});
+		}.bind(this));
 	},
 
 	showNearbyPlaces: function(startPos, radius){
