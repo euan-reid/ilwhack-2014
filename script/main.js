@@ -129,7 +129,7 @@ var MainClass = new Class({
 							console.log("Failed to retrieve events from " + key);
 							console.log(resp);
 						}
-						deferred.resolve(result); //result?
+						deferred.resolve();
 					}
 					return callback;
 				}
