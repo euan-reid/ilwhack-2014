@@ -18,6 +18,9 @@ var Locator = new Class({
 			return;
 		}
 
+		console.log('cache:');
+		console.log(this.storedData.locCache);
+
 		if(this.storedData.locCache){
 			$.each(this.storedData.locCache, function( index, value ) {
 				if(locationName == value.name){
@@ -38,10 +41,10 @@ var Locator = new Class({
 		  {
 		  		console.log(results[0].geometry.location);
 		  		this.addResult(new Vec2(results[0].geometry.location.d, results[0].geometry.location.e));
-		  		this.locCache = {
-		  			name: results[0].geometry.location,
+		  		this.storedData.locCache.push({
+		  			name: locationName,
 		  			location: new Vec2(results[0].geometry.location.d, results[0].geometry.location.e)
-		  		}
+		  		});
 		  		return;
 		  		
 		  } else {

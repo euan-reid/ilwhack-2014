@@ -195,7 +195,7 @@ var MainClass = new Class({
 	},
 
 	showPopUpNormalEvent: function(event){
-		if(!event.location){
+		if(!event.location ||  (typeof event.location ) == 'string'){
 			this.showPopUpNormalEvent_withoutLocation(event);
 		} else {
 			this.showPopUpNormalEvent_withLocation(event);

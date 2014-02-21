@@ -10,6 +10,14 @@ $events = array();
     $eventsArray['location'] =  "";
     $events[] = $eventsArray;
 
+    $eventsArray = array();
+    $eventsArray['title'] = "Breakfast at Tiffany's";
+    $eventsArray['start'] = "2014-02-19 08:00:00";
+    $eventsArray['end'] = "2014-02-19 10:00:00";
+    //$eventsArray['location'] = array(55.953036,-3.191765);
+    $eventsArray['location'] =  "Mercure Edinburgh City - Princes Street Hotel, Princes Street, Edinburgh, United Kingdom";
+    $events[] = $eventsArray;
+
 	$eventsArray = array();
 	$eventsArray['title'] = "Breakfast at Tiffany's";
     $eventsArray['start'] = "2014-02-20 08:00:00";
