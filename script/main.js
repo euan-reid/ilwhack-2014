@@ -105,7 +105,7 @@ var MainClass = new Class({
 					'timeMin': '2014-02-15T12:00:00-00:00'
 				})
 				var deferred = new $.Deferred();
-				function callbackMaker (key) {
+				function callbackMaker (key, deferred) {
 					function callback(resp) {
 						if (resp && !resp.error && resp.items) {
 							console.log(key);
@@ -133,6 +133,7 @@ var MainClass = new Class({
 					}
 					return callback;
 				}
+				request.execute(callbackMaker(key, deferred));
 				loads.push(deferred.promise());
 			}
 			$.when.apply(null, loads).then(function(){Main.showCalendar('#calendar', importData)});
