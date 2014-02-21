@@ -19,6 +19,8 @@
 			var command = <?php if(isset($_GET['com']) == 'test') echo "'test'"; else echo "null"; ?>;
 		</script>
 
+		<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+
 		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
