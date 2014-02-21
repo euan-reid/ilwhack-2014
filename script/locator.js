@@ -20,18 +20,19 @@ var Locator = new Class({
 			return;
 		}
 		
-		if (window.cache && window.cache[locationName]) {
+		/*if (window.cache && window.cache[locationName]) {
 			this.addResult(cache[locationName]);
 			return;
-		}
+		}*/
 
 		var geocoder = new google.maps.Geocoder();
 		geocoder.geocode( { 'address': locationName}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK)
 			{
 					console.log(results[0].geometry.location);
-					window.cache[locationName] = new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
-					this.addResult(window.cache[locationName]);
+					var loc = new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
+					//window.cache[locationName] = loc;
+					this.addResult(loc);
 					return;
 				
 			} else {
