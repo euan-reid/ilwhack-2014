@@ -102,6 +102,7 @@ var MainClass = new Class({
 					continue;
 				var request = gapi.client.calendar.events.list({
 					'calendarId': calendarIds[key],
+					'singleEvents': true,
 					'timeMin': '2014-02-15T12:00:00-00:00'
 				})
 				var deferred = new $.Deferred();
