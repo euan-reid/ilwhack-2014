@@ -18,19 +18,19 @@ var Locator = new Class({
 			return;
 		}
 
-		console.log('cache:');
-		console.log(this.storedData.locCache);
+		//console.log('cache:');
+		//console.log(this.storedData.locCache);
 
-		if(this.storedData.locCache){
+		/*if(this.storedData.locCache){
 			$.each(this.storedData.locCache, function( index, value ) {
 				if(locationName == value.name){
 					console.log(">> SKIPPED <<");
-					this.addResult(new Vec2( value.location.getX(), value.location.getY()));
-					return;
+					//this.addResult(new Vec2( value.location.getX(), value.location.getY()));
+					//return;
 				}
 
 			}.bind(this));
-		}
+		}*/
 
 		console.log(locationName);
 
@@ -40,11 +40,11 @@ var Locator = new Class({
 		  if (status == google.maps.GeocoderStatus.OK)
 		  {
 		  		console.log(results[0].geometry.location);
-		  		this.addResult(new Vec2(results[0].geometry.location.d, results[0].geometry.location.e));
 		  		this.storedData.locCache.push({
 		  			name: locationName,
 		  			location: new Vec2(results[0].geometry.location.d, results[0].geometry.location.e)
 		  		});
+		  		this.addResult(new Vec2(results[0].geometry.location.d, results[0].geometry.location.e));
 		  		return;
 		  		
 		  } else {
