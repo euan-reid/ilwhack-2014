@@ -142,6 +142,7 @@ var MainClass = new Class({
 		</div></center>\
 		</table>\
 		";
+
 		$( "#popUpDialog" ).html(htmlText);
 
 		console.log(event.rating);
@@ -174,6 +175,37 @@ var MainClass = new Class({
 		});
 
 		this.showMapWithLocation(event.location, event.reference);
+	},
+
+	showPopUpNormalEvent: function(event){
+		if(!event.location)
+			return;
+
+		var htmlText = "\
+		<table><tr>\
+		<td><div id='map-canvas' class='gmap_canvas'></div>\
+		<tr><td>\
+		<center>\
+		<div class='eventInfoButtons'>\
+		<input type='button' id='eventInfoButtons_back' value='Back'>\
+		</div></center>\
+		</table>\
+		";
+
+		$( "#popUpDialog" ).html(htmlText);
+
+		$('#eventInfoButtons_back').click(function(){
+			$( "#popUpDialog" ).dialog( "close" );
+		}.bind(this));
+
+		$(function() {
+			$( "#popUpDialog" ).dialog({ minWidth: 650 });
+		});
+
+		event.reference = "";
+		console.log(event.location);
+		this.showMapWithLocation(event.location, event.reference);
+
 	},
 
 	showMapWithLocation: function(location, reference){
@@ -300,6 +332,8 @@ var MainClass = new Class({
 				if(event.suggestion == true){
 					this.showPopUp(event);
 					//$('#calendar').fullCalendar('updateEvent', event);
+				} else {
+					this.showPopUpNormalEvent(event);
 				}
 			}.bind(this),
 
