@@ -57,10 +57,19 @@ var MainClass = new Class({
 
 		this.drawSpiderGraph(Main.goalsInHours, Main.hoursDone);
 
-		if(this.command == 'test'){
+		if(this.command != 'test'){
 			var importData = { url: '/php/userData.php' };
 			this.showCalendar('#calendar', importData);
+			
+			this.hoursDone = {
+				live: 70,
+				work: 2,
+				play: 6
+			};
+			this.hoursDone.rest = 168 - this.live - this.work - this.play;
 		}
+		
+		
 		
 		$('#spidergraph').mouseover( function(){ Main.openChart(); } ).mouseout( function(){ Main.closeChart(); } );
 
