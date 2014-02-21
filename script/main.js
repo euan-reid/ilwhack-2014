@@ -186,16 +186,39 @@ var MainClass = new Class({
 		
 
 		$(function() {
-			$( "#popUpDialog" ).dialog({ minWidth: 650 });
+			$( "#popUpDialog" ).dialog({ minWidth: 650, maxHeight: 1000 });
 		});
 
 		this.showMapWithLocation(event.location, event.reference);
 	},
 
 	showPopUpNormalEvent: function(event){
-		if(!event.location)
-			return;
+		if(!event.location){
+			this.showPopUpNormalEvent_withoutLocation(event);
+		} else {
+			this.showPopUpNormalEvent_withLocation(event);
+		}
 
+	},
+
+	showPopUpNormalEvent_withoutLocation: function(event){
+		var htmlText = "\
+		No additional data provided.<BR><BR>\
+		<input type='button' id='eventInfoButtons_back' value='Back'>\
+		";
+
+		$( "#popUpDialog" ).html(htmlText);
+
+		$('#eventInfoButtons_back').click(function(){
+			$( "#popUpDialog" ).dialog( "close" );
+		}.bind(this));
+
+		$(function() {
+			$( "#popUpDialog" ).dialog({ minWidth: 200, maxHeight: 100});
+		});
+	},
+
+	showPopUpNormalEvent_withLocation: function(event){
 		var htmlText = "\
 		<table><tr>\
 		<td><div id='map-canvas' class='gmap_canvas'></div>\
@@ -214,13 +237,12 @@ var MainClass = new Class({
 		}.bind(this));
 
 		$(function() {
-			$( "#popUpDialog" ).dialog({ minWidth: 650 });
+			$( "#popUpDialog" ).dialog({ minWidth: 430, maxHeight: 1000 });
 		});
 
 		event.reference = "";
 		console.log(event.location);
 		this.showMapWithLocation(event.location, event.reference);
-
 	},
 
 	showMapWithLocation: function(location, reference){

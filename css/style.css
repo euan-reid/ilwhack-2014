@@ -50,7 +50,10 @@ h1 {
 		text-align: center;
 		width: 10%;
 	}
-	#banner > img {width: 100%;}
+	#banner > img {
+		width: 100%;
+		cursor: pointer;
+	}
 
 	/* Spider graph */
 	#graphbox {
