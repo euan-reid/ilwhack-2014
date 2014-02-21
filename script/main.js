@@ -46,6 +46,8 @@ var MainClass = new Class({
 			var importData = { url: '/php/userData.php' };
 			this.showCalendar('#calendar', importData);
 		}
+		
+		$('#spidergraph').mouseover( function(){ openChart(); } ).mouseout( function(){ closeChart(); } );
 
 	},
 
@@ -443,12 +445,20 @@ var MainClass = new Class({
 
 });
 
+function closeChart(){
+	$(function() {
+		$( "#popUpChart" ).dialog("close");
+	});	
+}
+function openChart(){
+	$(function() {
+		$( "#popUpChart" ).dialog({ minWidth: 650 });
+	});	
+}
 
 var Main = new MainClass();
 
 $(document).ready(function() {
 	Main.ready(command);
-
-  	
 
 }).bind(this);

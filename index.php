@@ -56,6 +56,7 @@
 
 
 		<div id='popUpDialog' title="Event information"></div>
+		<div id='popUpChart' title="Information"></div>
 
 
 	</body>
