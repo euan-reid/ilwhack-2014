@@ -23,7 +23,7 @@ var Locator = new Class({
 		console.log('cache:');
 		console.log(this.cache);
 		
-		if (cache[locationName]) {
+		if (window.cache && window.cache[locationName]) {
 			this.addResult(cache[locationName]);
 			return;
 		}
@@ -33,7 +33,7 @@ var Locator = new Class({
 			if (status == google.maps.GeocoderStatus.OK)
 			{
 					console.log(results[0].geometry.location);
-					cache[locationName] = new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
+					window.cache[locationName] = new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
 					this.addResult(this.cache[locationName]);
 					return;
 				
