@@ -18,6 +18,7 @@ var Locator = new Class({
 		geocoder.geocode( { 'address': locationName}, function(results, status) {
 		  if (status == google.maps.GeocoderStatus.OK)
 		  {
+		  		console.log(results[0].geometry.location);
 		  		return new Vec2(results[0].geometry.location.d, results[0].geometry.location.e);
 		  }
 		});

@@ -69,6 +69,10 @@ var Suggestor = new Class({
 	giveSugestionsBasedOnFreeTimes: function(){
 		var events = this.getCallendarEvents();
 		var lastEvent = null;
+
+		events = this.fixLocations(events);
+		console.log(events);
+
 		$.each(events, function( index, value ) {
 
 			if(lastEvent != null){
@@ -78,6 +82,22 @@ var Suggestor = new Class({
 			lastEvent = value;
 
 		}.bind(this));
+
+	},
+
+	fixLocations: function(events){
+		var locator = new Locator(this);
+		var arr = new Array();
+
+		$.each(events, function( index, value ) {
+			console.log(value.location);
+
+			arr.push(value);
+			console.log(locator.findProperLocationByName(value.location));
+
+		}.bind(this));
+
+		return arr;
 
 	},
 
@@ -91,7 +111,7 @@ var Suggestor = new Class({
 
 		console.log(timeDifference);
 
-		if(timeDifference <= 120){
+		if(timeDifference > 0 && timeDifference <= 120){
 			console.log('YEAH');
 			var data = new Array(
 				new LocTime(new Vec2(firstEvent.location[0], firstEvent.location[1]), from),
