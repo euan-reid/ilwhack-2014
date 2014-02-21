@@ -34,6 +34,8 @@ var MainClass = new Class({
 		this.apiKey = 'AIzaSyB33EV0puEFY73thEKJFch-04qI8-85Fvg';
 		this.scopes = 'https://www.googleapis.com/auth/calendar';
 
+		this.callendarLoaded = false;
+
 	},
 
 	ready: function(command){
@@ -239,8 +241,15 @@ var MainClass = new Class({
 	},
 
 	showCalendar: function(div, importData){
+		if(this.callendarLoaded == true){
+			alert('Only one calendar can be loaded!');
+			return;
+		}
+
 		console.log('CALENDAR!');
 		console.log(importData);
+
+		this.callendarLoaded = true;
 
 		var calendar = $(div).fullCalendar({
 			header: {
