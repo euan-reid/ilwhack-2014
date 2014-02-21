@@ -46,6 +46,8 @@ var MainClass = new Class({
 			var importData = { url: '/php/userData.php' };
 			this.showCalendar('#calendar', importData);
 		}
+		
+		$('#spidergraph').mouseover( function(){ openChart(); } ).mouseout( function(){ closeChart(); } );
 
 	},
 
@@ -67,7 +69,7 @@ var MainClass = new Class({
 		else if (calName == "Socialise")
 			return '#F83A22';
 		else
-			return '#CCCCCC';
+			return '#F9F9F9';
 	},
 
 	fetchRemoteCalendarEvents: function(){
@@ -105,6 +107,7 @@ var MainClass = new Class({
 
 								importData.push(eventData);
 							}
+							Main.showCalendar('#calendar', importData);
 						} else {
 							console.log("Failed to retrieve events from " + key);
 							console.log(resp);
@@ -114,8 +117,6 @@ var MainClass = new Class({
 				}
 				request.execute(callbackMaker(key));
 			}
-
-			Main.showCalendar('#calendar', importData);
 		});
 	},
 
@@ -174,26 +175,26 @@ var MainClass = new Class({
 		var targetLoc = new google.maps.LatLng(location.getX(), location.getY());
 		
 		map = new google.maps.Map(document.getElementById('map-canvas'), {
-	    	center: targetLoc,
-		    zoom: 15
+		center: targetLoc,
+		zoom: 15
 		});
 
 		var request = {
-		  reference: reference
+			reference: reference
 		};
 
 		var infowindow = new google.maps.InfoWindow();
 		service = new google.maps.places.PlacesService(map);
 		service.getDetails(request, function(place, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
-			  var marker = new google.maps.Marker({
-			    map: map,
-			    position: place.geometry.location
-			  });
-			  google.maps.event.addListener(marker, 'click', function() {
-			    infowindow.setContent(place.name);
-			    infowindow.open(map, this);
-			  });
+				var marker = new google.maps.Marker({
+					map: map,
+					position: place.geometry.location
+				});
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.setContent(place.name);
+					sinfowindow.open(map, this);
+				});
 			}
 		});
 
@@ -201,7 +202,7 @@ var MainClass = new Class({
 
 	showMapWithLocationCallbcak: function(place, status){
 		if (status == google.maps.places.PlacesServiceStatus.OK) {
-		    createMarker(place);
+			createMarker(place);
 		}
 	},
 
@@ -443,12 +444,20 @@ var MainClass = new Class({
 
 });
 
+function closeChart(){
+	$(function() {
+		$( "#popUpChart" ).dialog("close");
+	});	
+}
+function openChart(){
+	$(function() {
+		$( "#popUpChart" ).dialog({ minWidth: 650 });
+	});	
+}
 
 var Main = new MainClass();
 
 $(document).ready(function() {
 	Main.ready(command);
-
-  	
 
 }).bind(this);
