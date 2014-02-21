@@ -19,9 +19,6 @@ var Locator = new Class({
 			this.addResult(null);
 			return;
 		}
-
-		console.log('cache:');
-		console.log(this.cache);
 		
 		if (window.cache && window.cache[locationName]) {
 			this.addResult(cache[locationName]);
