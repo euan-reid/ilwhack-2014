@@ -60,6 +60,7 @@ var MainClass = new Class({
 					'timeMin': '2014-02-15T12:00:00-00:00'
 				})
 				request.execute(function(key, resp) {
+					console.log(key)
 					if (resp && !resp.error && resp.items) {
 						console.log(key);
 						console.log(resp.items);
@@ -79,7 +80,7 @@ var MainClass = new Class({
 							importData.push(eventData);
 						}
 					} else {
-						console.log("Failed to retrieve events from " + key);
+						console.log("Failed to retrieve events from " + calendarIds[key]);
 						console.log(resp);
 					}
 				}(key));
