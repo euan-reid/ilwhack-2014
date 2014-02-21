@@ -13,7 +13,6 @@ var Locator = new Class({
 	},
 
 	findProperLocationByName: function(locationName){
-		console.log(locationName);
 		if(!locationName || locationName == ""){
 			this.addResult(null);
 			return;
@@ -21,13 +20,16 @@ var Locator = new Class({
 
 		if(this.storedData.locCache){
 			$.each(this.storedData.locCache, function( index, value ) {
-				if(locationName == value.location){
+				if(locationName == value.name){
+					console.log(">> SKIPPED <<");
 					this.addResult(new Vec2( value.location.getX(), value.location.getY()));
 					return;
 				}
 
 			}.bind(this));
 		}
+
+		console.log(locationName);
 
 
 		var geocoder = new google.maps.Geocoder();
