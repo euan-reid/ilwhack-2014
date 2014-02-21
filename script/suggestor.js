@@ -84,6 +84,7 @@ var Suggestor = new Class({
 		}.bind(this);
 
 		var action = new Solver(this, events, findLonglatForNamesLocationsCallback);
+		action.storedData.locCache = new Array();
 
 		$.each(events, function( index, value ) {
 			action.addFunction(locator.findProperLocationByName, [value.location]);
