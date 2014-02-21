@@ -43,8 +43,8 @@ $events = array();
 
     $eventsArray = array();
     $eventsArray['title'] = "National Gallery of Scotland";
-    $eventsArray['start'] = "2014-02-21 12:00:00";
-    $eventsArray['end'] = "2014-02-21 13:30:00";
+    $eventsArray['start'] = "2014-02-21 12:30:00";
+    $eventsArray['end'] = "2014-02-21 13:45:00";
     $eventsArray['location'] =  "National Gallery of Scotland, Edinburgh, United Kingdom";
     $events[] = $eventsArray;
 

@@ -68,7 +68,7 @@ var Locator = new Class({
 	    this.request = {
 		    location: that.startLatLng,
 		    radius: radius,
-		    types: ['store']
+		    types: ['food']
 		};
 
 		this.infowindow = new google.maps.InfoWindow();
