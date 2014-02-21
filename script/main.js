@@ -46,6 +46,23 @@ var MainClass = new Class({
 	calendarLoaded: function(){
 		this.suggestor = new Suggestor(this);
 	},
+	
+	calColour: function(calName){
+		if (calName == "Sleep")
+			return '#A47AE2';
+		else if (calName == "Eat")
+			return '#FAD165';
+		else if (calName == "Work")
+			return '#9FC6E7';
+		else if (calName == "Learning")
+			return '#9FE1E7';
+		else if (calName == "Exercise")
+			return '#16A765';
+		else if (calName == "Socialise")
+			return '#F83A22';
+		else
+			return '#CCCCCC';
+	},
 
 	fetchRemoteCalendarEvents: function(){
 		gapi.client.load('calendar', 'v3', function() {
@@ -70,7 +87,7 @@ var MainClass = new Class({
 									start: resp.items[i].start.dateTime,
 									end: resp.items[i].end.dateTime,
 									location: (resp.items[i].location!=null) ? resp.items[i].location : null,
-									backgroundColor: '#fff',
+									backgroundColor: Main.calColour(key),
 									textColor: '#333',
 									allDay: false,
 									editable: false,
